@@ -38,6 +38,7 @@
 
     <modules>
         <module>auth-service</module>
+        <module>catalog-service</module>
         <module>common</module>
     </modules>
 

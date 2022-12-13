@@ -8,10 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="common" />
         <module name="auth-service" />
+        <module name="catalog-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="auth-service" target="11" />
+      <module name="catalog-service" target="11" />
       <module name="common" target="11" />
       <module name="spring-boot-bookstore" target="1.8" />
     </bytecodeTargetLevel>
@@ -19,6 +21,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="auth-service" options="-parameters" />
+      <module name="catalog-service" options="-parameters" />
       <module name="common" options="-parameters" />
     </option>
   </component>
