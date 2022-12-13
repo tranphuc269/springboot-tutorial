@@ -2,7 +2,7 @@ package com.bookstore.catalogservice.category.command.api.controller;
 
 
 import com.bookstore.catalogservice.category.command.api.commands.CreateCategoryCommand;
-import com.bookstore.catalogservice.category.command.api.data.dto.CreateCategoryRequest;
+import com.bookstore.catalogservice.category.data.dto.CreateCategoryRequest;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;

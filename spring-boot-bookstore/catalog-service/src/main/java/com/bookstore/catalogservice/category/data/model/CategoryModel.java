@@ -1,4 +1,4 @@
-package com.bookstore.catalogservice.category.command.api.data.model;
+package com.bookstore.catalogservice.category.data.model;
 
 import com.bookstore.common.infrastructure.repo.model.BaseModel;
 import lombok.Getter;

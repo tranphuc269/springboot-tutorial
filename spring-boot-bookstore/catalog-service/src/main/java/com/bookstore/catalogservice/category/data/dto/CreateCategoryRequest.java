@@ -1,4 +1,4 @@
-package com.bookstore.catalogservice.category.command.api.data.dto;
+package com.bookstore.catalogservice.category.data.dto;
 
 
 import lombok.AllArgsConstructor;
