@@ -14,6 +14,6 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 @Getter
 public class CreateAttributeCommand {
     @TargetAggregateIdentifier
-    private String id;
+    private String attributeId;
     private String name;
 }

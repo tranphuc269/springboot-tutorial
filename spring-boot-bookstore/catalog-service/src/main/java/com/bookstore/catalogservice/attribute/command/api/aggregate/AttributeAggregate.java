@@ -14,7 +14,7 @@ public class AttributeAggregate {
 
 
     @AggregateIdentifier
-    private String id;
+    private String attributeId;
     private String name;
 
     public AttributeAggregate() {
@@ -24,15 +24,16 @@ public class AttributeAggregate {
     public AttributeAggregate(CreateAttributeCommand command){
         CreateAttributeEvent event = CreateAttributeEvent
                 .builder()
-                .id(command.getId())
+                .attributeId(command.getAttributeId())
                 .name(command.getName())
                 .build();
+        System.out.println("Send event : " + event);
         AggregateLifecycle.apply(event);
     }
 
     @EventSourcingHandler
     public void on(CreateAttributeEvent event){
-        this.id = event.getId();
+        this.attributeId = event.getAttributeId();
         this.name = event.getName();
     }
 }

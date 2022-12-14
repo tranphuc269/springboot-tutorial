@@ -27,7 +27,7 @@ public class AttributeValueController {
         CreateAttributeValueCommand command = CreateAttributeValueCommand
                 .builder()
                 .attributeId(request.getAttributeId())
-                .id(UUID.randomUUID().toString())
+                .attributeValueId(UUID.randomUUID().toString())
                 .value(request.getValue())
                 .productId(request.getProductId())
                 .build();

@@ -2,8 +2,8 @@ package com.bookstore.catalogservice.attribute.data.model;
 
 
 import com.bookstore.common.infrastructure.repo.model.BaseModel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -11,12 +11,14 @@ import javax.persistence.*;
 @Table(name = "attributes")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class AttributeModel extends BaseModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name = "attribute_id", updatable = false, nullable = false)
-    private String id;
+    private String attributeId;
 
     private String name;
-
 }

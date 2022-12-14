@@ -2,16 +2,26 @@ package com.bookstore.catalogservice.attribute.data.model;
 
 
 import com.bookstore.common.infrastructure.repo.model.BaseModel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "attribute_values")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class AttributeValueModel extends BaseModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator="attribute_value-uuid")
+    @GenericGenerator(name="attribute_value-uuid", strategy = "uuid")
     @Column(name = "attribute_value_id", updatable = false, nullable = false)
-    private String id;
+    private String attributeValueId;
 
 
     @Column(name = "attribute_id", updatable = false, nullable = false)

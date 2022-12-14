@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateAttributeValueEvent {
-    private String id;
+    private String attributeValueId;
     private String attributeId;
 
     private String value;

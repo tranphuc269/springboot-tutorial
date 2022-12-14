@@ -7,6 +7,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 
 public class AttributeValueEventHandler {
@@ -15,11 +17,14 @@ public class AttributeValueEventHandler {
 
     @EventHandler
     public void on(CreateAttributeValueEvent event) {
-        System.out.println("Create attribute value event");
         AttributeValueModel model = new AttributeValueModel();
-
-        BeanUtils.copyProperties(event, model);
-
+        model.setAttributeId(event.getAttributeId());
+        model.setValue(event.getValue());
+        model.setCreateTime(new Date());
+        model.setUpdateTime(new Date());
+        model.setProductId(event.getProductId());
+        model.setStatus(1);
+        model.setValue(event.getValue());
         repository.save(model);
 
     }

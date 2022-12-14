@@ -7,6 +7,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 
 @Component
 public class AttributeEventHandler {
@@ -16,9 +19,10 @@ public class AttributeEventHandler {
 
     @EventHandler
     public void on(CreateAttributeEvent event){
-        AttributeModel model = new AttributeModel();
-        BeanUtils.copyProperties(event, model);
-        System.out.println("Event create attribute value");
+        AttributeModel model = new AttributeModel(event.getAttributeId(), event.getName());
+        model.setCreateTime(new Date());
+        model.setUpdateTime(new Date());
+        model.setStatus(1);
         repository.save(model);
     }
 }

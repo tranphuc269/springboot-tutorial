@@ -24,14 +24,14 @@ public class AttributeController {
     private CommandGateway gateway;
 
     @PostMapping
-    public BaseResponse<Void> createAttribute(@RequestBody CreateAttributeRequest request) {
+    public BaseResponse<String> createAttribute(@RequestBody CreateAttributeRequest request) {
         CreateAttributeCommand command = CreateAttributeCommand
                 .builder()
-                .id(UUID.randomUUID().toString())
+                .attributeId(UUID.randomUUID().toString())
                 .name(request.getName())
                 .build();
-        gateway.send(command);
-        return BaseResponse.ofSucceeded();
+        String result = gateway.sendAndWait(command);
+        return BaseResponse.ofSucceeded(result);
     }
 
 }

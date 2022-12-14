@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateAttributeEvent {
-    private String id;
+    private String attributeId;
     private String name;
 }

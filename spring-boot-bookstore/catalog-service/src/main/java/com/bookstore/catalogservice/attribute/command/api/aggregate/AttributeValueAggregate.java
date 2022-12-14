@@ -13,7 +13,7 @@ import org.axonframework.spring.stereotype.Aggregate;
 public class AttributeValueAggregate {
 
     @AggregateIdentifier
-    private String id;
+    private String attributeValueId;
     private String attributeId;
 
     private String value;
@@ -29,7 +29,7 @@ public class AttributeValueAggregate {
         CreateAttributeValueEvent event = CreateAttributeValueEvent
                 .builder()
                 .attributeId(command.getAttributeId())
-                .id(command.getId())
+                .attributeValueId(command.getAttributeValueId())
                 .value(command.getValue())
                 .productId(command.getProductId())
                 .build();
@@ -39,7 +39,7 @@ public class AttributeValueAggregate {
     @EventSourcingHandler
     public void on(CreateAttributeValueEvent event) {
         this.attributeId = event.getAttributeId();
-        this.id = event.getId();
+        this.attributeValueId = event.getAttributeValueId();
         this.value = event.getValue();
         this.productId = event.getProductId();
 
