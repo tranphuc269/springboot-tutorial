@@ -2,9 +2,11 @@ package com.bookstore.catalogservice.author.command.api.aggregate;
 
 import com.bookstore.catalogservice.author.command.api.commands.CreateAuthorCommand;
 import com.bookstore.catalogservice.author.command.api.commands.DeleteAuthorCommand;
+import com.bookstore.catalogservice.author.command.api.commands.EnableAuthorCommand;
 import com.bookstore.catalogservice.author.command.api.commands.UpdateAuthorCommand;
 import com.bookstore.catalogservice.author.command.api.events.CreateAuthorEvent;
 import com.bookstore.catalogservice.author.command.api.events.DeleteAuthorEvent;
+import com.bookstore.catalogservice.author.command.api.events.EnableAuthorEvent;
 import com.bookstore.catalogservice.author.command.api.events.UpdateAuthorEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -78,7 +80,7 @@ public class AuthorAggregate {
 
     // delete author
     @CommandHandler
-    public AuthorAggregate(DeleteAuthorCommand command){
+    public AuthorAggregate(DeleteAuthorCommand command) {
         DeleteAuthorEvent event = DeleteAuthorEvent
                 .builder()
                 .authorId(command.getAuthorId())
@@ -87,9 +89,27 @@ public class AuthorAggregate {
     }
 
     @EventSourcingHandler
-    public void on(DeleteAuthorEvent event){
+    public void on(DeleteAuthorEvent event) {
         this.authorId = event.getAuthorId();
         this.identify = UUID.randomUUID().toString();
+        this.status = 0;
+    }
+
+    // enable author
+    @CommandHandler
+    public AuthorAggregate(EnableAuthorCommand command) {
+        EnableAuthorEvent event = EnableAuthorEvent
+                .builder()
+                .authorId(command.getAuthorId())
+                .build();
+        AggregateLifecycle.apply(event);
+    }
+
+    @EventSourcingHandler
+    public void on(EnableAuthorEvent event) {
+        this.authorId = event.getAuthorId();
+        this.identify = UUID.randomUUID().toString();
+        this.status = 1;
     }
 
 }

@@ -56,4 +56,14 @@ public class AuthorEventHandlerImpl implements IAuthorEvent {
         author.get().setStatus(0);
         repository.save(author.get());
     }
+
+    @Override
+    public void on(EnableAuthorEvent event) {
+        Optional<AuthorModel> author = repository.findById(event.getAuthorId());
+        if(author.isEmpty()){
+            throw new RuntimeException("Not found by author id");
+        }
+        author.get().setStatus(1);
+        repository.save(author.get());
+    }
 }

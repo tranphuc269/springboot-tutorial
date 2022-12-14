@@ -1,0 +1,60 @@
+package com.bookstore.catalogservice.product.command.write_model.entity;
+
+import com.bookstore.common.infrastructure.repo.model.BaseModel;
+import lombok.*;
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.GenericGenerator;
+import java.util.List;
+import java.util.ArrayList;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Objects;
+
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Entity
+@Table(name = "products")
+@Builder
+@AllArgsConstructor
+public class ProductCommandEntity extends BaseModel {
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "product_id", updatable = false, nullable = false)
+    private String productId;
+
+    @Column(name = "name", nullable = false, columnDefinition = "TEXT")
+    private String name;
+
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+    @Column(name = "short_content", columnDefinition = "TEXT")
+    private String shortContent;
+    private BigDecimal price;
+
+    @Column(name = "available_item_count")
+    private int availableItemCount;
+    @Column(name = "images", columnDefinition = "TEXT", length = 10000)
+    private String images;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        ProductCommandEntity that = (ProductCommandEntity) o;
+        return productId != null && Objects.equals(productId, that.productId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
+    public List<String> getListImages() {
+        List<String> imgs = new ArrayList<>(List.of(this.getImages().replace(']', ' ').replace('[', ' ').trim().split(",")));
+        imgs.replaceAll(String::trim);
+        return imgs;
+    }
+}

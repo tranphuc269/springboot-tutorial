@@ -2,9 +2,11 @@ package com.bookstore.catalogservice.author.command.api.controller;
 
 import com.bookstore.catalogservice.author.command.api.commands.CreateAuthorCommand;
 import com.bookstore.catalogservice.author.command.api.commands.DeleteAuthorCommand;
+import com.bookstore.catalogservice.author.command.api.commands.EnableAuthorCommand;
 import com.bookstore.catalogservice.author.command.api.commands.UpdateAuthorCommand;
 import com.bookstore.catalogservice.author.command.write_data.request.CreateAuthorRequest;
 import com.bookstore.catalogservice.author.command.write_data.request.DeleteAuthorRequest;
+import com.bookstore.catalogservice.author.command.write_data.request.EnableAuthorRequest;
 import com.bookstore.catalogservice.author.command.write_data.request.UpdateAuthorRequest;
 import com.bookstore.common.application.response.dto.BaseResponse;
 import lombok.NoArgsConstructor;
@@ -37,7 +39,7 @@ public class AuthorCommandController {
     }
 
     @PutMapping
-    public BaseResponse<Void> update(@RequestBody UpdateAuthorRequest request){
+    public BaseResponse<Void> updateAuthor(@RequestBody UpdateAuthorRequest request){
         UpdateAuthorCommand command = UpdateAuthorCommand
                 .builder()
                 .authorName(request.getAuthorName())
@@ -50,11 +52,29 @@ public class AuthorCommandController {
     }
 
 
-    @DeleteMapping
-    public BaseResponse<Void> deleteAuthor(@RequestBody DeleteAuthorRequest request){
+    @DeleteMapping("/{authorId}")
+    public BaseResponse<Void> deleteAuthor(@PathVariable String authorId){
+        DeleteAuthorRequest request = DeleteAuthorRequest
+                .builder()
+                .authorId(authorId)
+                .build();
         DeleteAuthorCommand command = DeleteAuthorCommand
                 .builder()
                 .authorId(request.getAuthorId())
+                .build();
+        gateway.send(command);
+        return BaseResponse.ofSucceeded();
+    }
+
+    @PutMapping("/enable/{authorId}")
+    public BaseResponse<Void> enableAuthor(@PathVariable String authorId){
+        EnableAuthorRequest request = EnableAuthorRequest
+                .builder()
+                .authorId(authorId)
+                .build();
+        EnableAuthorCommand command = EnableAuthorCommand
+                .builder()
+                .authorId(authorId)
                 .build();
         gateway.send(command);
         return BaseResponse.ofSucceeded();

@@ -22,7 +22,7 @@ public class CategoryQueryController {
     private QueryGateway queryGateway;
 
     @GetMapping
-    public BaseResponse<List<CategoryResponse>> getALlCategory() {
+    public BaseResponse<List<CategoryResponse>> getAllCategory() {
         GetCategoryQuery query = new GetCategoryQuery();
         return BaseResponse
                 .ofSucceeded(
