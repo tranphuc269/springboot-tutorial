@@ -1,4 +1,4 @@
-package com.bookstore.catalogservice.attribute.data.model;
+package com.bookstore.catalogservice.attribute.command.write_data.entity;
 
 
 import com.bookstore.common.infrastructure.repo.model.BaseModel;

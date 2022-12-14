@@ -2,7 +2,7 @@ package com.bookstore.catalogservice.attribute.command.api.controller;
 
 
 import com.bookstore.catalogservice.attribute.command.api.commands.CreateAttributeValueCommand;
-import com.bookstore.catalogservice.attribute.data.dto.request.CreateAttributeValueRequest;
+import com.bookstore.catalogservice.attribute.command.write_data.request.CreateAttributeValueRequest;
 import com.bookstore.common.application.response.dto.BaseResponse;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;

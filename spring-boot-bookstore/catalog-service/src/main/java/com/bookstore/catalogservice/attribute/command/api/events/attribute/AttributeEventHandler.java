@@ -1,13 +1,11 @@
 package com.bookstore.catalogservice.attribute.command.api.events.attribute;
 
-import com.bookstore.catalogservice.attribute.data.model.AttributeModel;
-import com.bookstore.catalogservice.attribute.data.repository.AttributeRepository;
+import com.bookstore.catalogservice.attribute.command.write_data.entity.AttributeModel;
+import com.bookstore.catalogservice.attribute.repository.AttributeRepository;
 import org.axonframework.eventhandling.EventHandler;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 

@@ -1,4 +1,4 @@
-package com.bookstore.catalogservice.attribute.data.dto.request;
+package com.bookstore.catalogservice.attribute.command.write_data.request;
 
 
 import lombok.Builder;

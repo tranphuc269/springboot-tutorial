@@ -1,9 +1,8 @@
 package com.bookstore.catalogservice.attribute.command.api.events.attributevalue;
 
-import com.bookstore.catalogservice.attribute.data.model.AttributeValueModel;
-import com.bookstore.catalogservice.attribute.data.repository.AttributeValueRepository;
+import com.bookstore.catalogservice.attribute.command.write_data.entity.AttributeValueModel;
+import com.bookstore.catalogservice.attribute.repository.AttributeValueRepository;
 import org.axonframework.eventhandling.EventHandler;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,8 +25,5 @@ public class AttributeValueEventHandler {
         model.setStatus(1);
         model.setValue(event.getValue());
         repository.save(model);
-
     }
-
-
 }
