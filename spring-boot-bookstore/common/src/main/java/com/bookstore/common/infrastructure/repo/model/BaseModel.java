@@ -2,6 +2,7 @@ package com.bookstore.common.infrastructure.repo.model;
 
 import lombok.Data;
 import lombok.experimental.FieldNameConstants;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -29,6 +30,7 @@ public abstract class BaseModel implements Serializable {
     @LastModifiedDate
     private Date updateTime;
 
-    @Column(name = "status", nullable = false, columnDefinition = "1")
+    @Column(name = "status", nullable = false, columnDefinition = "int")
+    @ColumnDefault("1")
     private int status;
 }
