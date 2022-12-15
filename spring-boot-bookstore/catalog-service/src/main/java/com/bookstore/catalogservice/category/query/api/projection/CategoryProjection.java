@@ -32,6 +32,4 @@ public class CategoryProjection {
                                 .build())
                 .collect(Collectors.toList());
     }
-
-
 }
