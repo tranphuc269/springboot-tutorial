@@ -7,9 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Data
 @Setter
 @Builder
-public class EnableProductEvent {
+@Data
+public class SellProductEvent {
     private String productId;
+    private int quantity;
 }

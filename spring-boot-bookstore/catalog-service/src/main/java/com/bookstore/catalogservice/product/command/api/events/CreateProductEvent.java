@@ -24,4 +24,6 @@ public class CreateProductEvent {
     private int availableItemCount;
 
     private String images;
+
+    private int quantitySold;
 }

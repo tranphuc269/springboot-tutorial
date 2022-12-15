@@ -29,6 +29,7 @@ public class ProductEventHandlerImpl implements IProductEventHandler {
                 .shortContent(event.getShortContent())
                 .description(event.getDescription())
                 .price(event.getPrice())
+                .quantitySold(0)
                 .build();
         product.setStatus(1);
         product.setCreateTime(new Date());
@@ -67,8 +68,9 @@ public class ProductEventHandlerImpl implements IProductEventHandler {
         }
         productCommand.get().setUpdateTime(new Date());
         productCommand.get().setStatus(0);
+        repository.save(productCommand.get());
     }
-
+    @EventHandler
     @Override
     public void on(EnableProductEvent event) {
         Optional<ProductCommandEntity> productCommand =
@@ -79,5 +81,20 @@ public class ProductEventHandlerImpl implements IProductEventHandler {
         }
         productCommand.get().setUpdateTime(new Date());
         productCommand.get().setStatus(1);
+        repository.save(productCommand.get());
+    }
+    @EventHandler
+    @Override
+    public void on(SellProductEvent event) {
+        Optional<ProductCommandEntity> productCommand =
+                repository.findById(event.getProductId());
+        if(productCommand.isEmpty()){
+            throw new ExceptionCommon(new BusinessError(404,
+                    "Not found product", HttpStatus.NOT_FOUND));
+        }
+        productCommand.get()
+                .setQuantitySold(productCommand.get().getQuantitySold()
+                        + event.getQuantity());
+        repository.save(productCommand.get());
     }
 }

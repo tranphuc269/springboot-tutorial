@@ -39,6 +39,9 @@ public class ProductCommandEntity extends BaseModel {
     @Column(name = "images", columnDefinition = "TEXT", length = 10000)
     private String images;
 
+    @Column(name = "quantity_sold")
+    private int quantitySold;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -20,6 +20,7 @@ public class CategoryModel extends BaseModel {
     @Column(name = "category_name", nullable = false, columnDefinition = "TEXT")
     private String categoryName;
 
+    @Column(name = "description", columnDefinition = "TEXT", length = 100000)
     private String description;
     @Column(name = "image", columnDefinition = "TEXT", length = 100000)
     private String image;

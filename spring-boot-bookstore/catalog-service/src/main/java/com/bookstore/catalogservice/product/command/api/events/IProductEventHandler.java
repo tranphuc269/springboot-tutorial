@@ -6,4 +6,6 @@ public interface IProductEventHandler {
     public void on(DeleteProductEvent event);
 
     public void on(EnableProductEvent event);
+
+    public void on(SellProductEvent event);
 }

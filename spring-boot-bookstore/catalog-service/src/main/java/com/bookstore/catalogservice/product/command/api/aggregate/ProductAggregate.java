@@ -1,14 +1,8 @@
 package com.bookstore.catalogservice.product.command.api.aggregate;
 
 
-import com.bookstore.catalogservice.product.command.api.commands.CreateProductCommand;
-import com.bookstore.catalogservice.product.command.api.commands.DeleteProductCommand;
-import com.bookstore.catalogservice.product.command.api.commands.EnableProductCommand;
-import com.bookstore.catalogservice.product.command.api.commands.UpdateProductCommand;
-import com.bookstore.catalogservice.product.command.api.events.CreateProductEvent;
-import com.bookstore.catalogservice.product.command.api.events.DeleteProductEvent;
-import com.bookstore.catalogservice.product.command.api.events.EnableProductEvent;
-import com.bookstore.catalogservice.product.command.api.events.UpdateProductEvent;
+import com.bookstore.catalogservice.product.command.api.commands.*;
+import com.bookstore.catalogservice.product.command.api.events.*;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -39,6 +33,8 @@ public class ProductAggregate {
 
     private int status;
 
+    private int quantitySold;
+
     public ProductAggregate() {
     }
 
@@ -54,6 +50,7 @@ public class ProductAggregate {
                 .price(command.getPrice())
                 .availableItemCount(command.getAvailableItemCount())
                 .images(command.getImages())
+                .quantitySold(0)
                 .build();
         AggregateLifecycle.apply(event);
     }
@@ -68,6 +65,7 @@ public class ProductAggregate {
         this.availableItemCount = event.getAvailableItemCount();
         this.images = event.getImages();
         this.status = 1;
+        this.quantitySold = 0;
     }
 
     // update product
@@ -119,7 +117,7 @@ public class ProductAggregate {
     // enable product
     @CommandHandler
     public ProductAggregate(EnableProductCommand command) {
-        DeleteProductEvent event = DeleteProductEvent
+        EnableProductEvent event = EnableProductEvent
                 .builder()
                 .productId(command.getProductId())
                 .build();
@@ -132,6 +130,24 @@ public class ProductAggregate {
         this.identify = UUID.randomUUID().toString();
         this.productId = event.getProductId();
     }
+
+    // sell product
+    @CommandHandler
+    public ProductAggregate(SellProductCommand command) {
+        SellProductCommand event = SellProductCommand
+                .builder()
+                .productId(command.getProductId())
+                .quantity(command.getQuantity())
+                .build();
+        AggregateLifecycle.apply(event);
+    }
+
+    @EventSourcingHandler
+    public void on(SellProductEvent event){
+        this.quantitySold = event.getQuantity();
+        this.productId = event.getProductId();
+    }
+
 
 
 }
