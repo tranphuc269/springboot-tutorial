@@ -1,5 +1,6 @@
 package com.bookstore.catalogservice.product.query.read_model.entity;
 
+import com.bookstore.common.infrastructure.repo.model.BaseModel;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
@@ -19,7 +20,7 @@ import java.util.Objects;
 @Table(name = "products")
 @Builder
 @AllArgsConstructor
-public class ProductQueryEntity {
+public class ProductQueryEntity extends BaseModel {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
