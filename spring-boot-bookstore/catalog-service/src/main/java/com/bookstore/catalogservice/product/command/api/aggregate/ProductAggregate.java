@@ -35,6 +35,10 @@ public class ProductAggregate {
 
     private int quantitySold;
 
+    private String authorId;
+
+    private String categoryId;
+
     public ProductAggregate() {
     }
 
@@ -51,6 +55,8 @@ public class ProductAggregate {
                 .availableItemCount(command.getAvailableItemCount())
                 .images(command.getImages())
                 .quantitySold(0)
+                .authorId(command.getAuthorId())
+                .categoryId(command.getCategoryId())
                 .build();
         AggregateLifecycle.apply(event);
     }
@@ -66,6 +72,8 @@ public class ProductAggregate {
         this.images = event.getImages();
         this.status = 1;
         this.quantitySold = 0;
+        this.authorId = event.getAuthorId();
+        this.categoryId = event.getCategoryId();
     }
 
     // update product
@@ -80,6 +88,8 @@ public class ProductAggregate {
                 .price(command.getPrice())
                 .availableItemCount(command.getAvailableItemCount())
                 .images(command.getImages())
+                .authorId(command.getAuthorId())
+                .categoryId(command.getCategoryId())
                 .build();
         AggregateLifecycle.apply(event);
     }
@@ -95,6 +105,8 @@ public class ProductAggregate {
         this.availableItemCount = event.getAvailableItemCount();
         this.images = event.getImages();
         this.status = 1;
+        this.categoryId = event.getCategoryId();
+        this.authorId = event.getAuthorId();
     }
 
     // delete product

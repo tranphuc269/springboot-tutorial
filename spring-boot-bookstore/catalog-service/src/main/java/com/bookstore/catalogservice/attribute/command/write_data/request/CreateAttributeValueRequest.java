@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateAttributeValueRequest {
-    private String attributeValueId;
     private String attributeId;
 
     private String value;

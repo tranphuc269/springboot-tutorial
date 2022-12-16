@@ -22,4 +22,8 @@ public class UpdateProductEvent {
     private int availableItemCount;
 
     private String images;
+
+    private String authorId;
+
+    private String categoryId;
 }

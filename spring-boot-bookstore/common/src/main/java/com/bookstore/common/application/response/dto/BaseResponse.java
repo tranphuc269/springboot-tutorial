@@ -48,23 +48,23 @@ public class BaseResponse<T> {
         return response;
     }
 
-    public static BaseResponse<Void> ofFailed(BusinessError errorCode) {
+    public static <T> BaseResponse<T> ofFailed(BusinessError errorCode) {
         return ofFailed(errorCode, null);
     }
 
-    public static BaseResponse<Void> ofFailed(BusinessError errorCode, String message) {
-        return ofFailed(errorCode, message, null);
+    public static <T> BaseResponse<T> ofFailed(BusinessError errorCode, String message) {
+        return ofFailed(errorCode, errorCode.getMessage(), null);
     }
 
-    public static BaseResponse<Void> ofFailed(BusinessError errorCode, String message, List<FieldViolation> errors) {
-        BaseResponse<Void> response = new BaseResponse<>();
+    public static <T> BaseResponse<T> ofFailed(BusinessError errorCode, String message, List<FieldViolation> errors) {
+        BaseResponse<T> response = new BaseResponse<>();
         response.meta.code = errorCode.getCode();
         response.meta.message = (message != null) ? message : errorCode.getMessage();
         response.meta.errors = (errors != null) ? new ArrayList<>(errors) : null;
         return response;
     }
 
-    public static BaseResponse<Void> ofFailed(ExceptionCommon exception) {
+    public static <T> BaseResponse<T> ofFailed(ExceptionCommon exception) {
         return ofFailed(exception.getErrorCode(), exception.getMessage());
     }
 

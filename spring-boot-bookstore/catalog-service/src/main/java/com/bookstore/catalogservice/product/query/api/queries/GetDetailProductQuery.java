@@ -1,4 +1,4 @@
-package com.bookstore.catalogservice.review.query.api.queries;
+package com.bookstore.catalogservice.product.query.api.queries;
 
 
 import lombok.Builder;
@@ -7,9 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Builder
-@Getter
 @Setter
+@Getter
 @Data
-public class GetReviewByProductId {
+public class GetDetailProductQuery {
     private String productId;
 }

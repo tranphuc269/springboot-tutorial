@@ -30,6 +30,8 @@ public class ProductEventHandlerImpl implements IProductEventHandler {
                 .description(event.getDescription())
                 .price(event.getPrice())
                 .quantitySold(0)
+                .categoryId(event.getCategoryId())
+                .authorId(event.getAuthorId())
                 .build();
         product.setStatus(1);
         product.setCreateTime(new Date());
@@ -53,6 +55,8 @@ public class ProductEventHandlerImpl implements IProductEventHandler {
         productCommand.get().setShortContent(event.getShortContent());
         productCommand.get().setAvailableItemCount(event.getAvailableItemCount());
         productCommand.get().setImages(event.getImages());
+        productCommand.get().setAuthorId(event.getAuthorId());
+        productCommand.get().setCategoryId(event.getCategoryId());
         productCommand.get().setUpdateTime(new Date());
         repository.save(productCommand.get());
     }

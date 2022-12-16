@@ -34,6 +34,8 @@ public class ProductCommandController {
                 .price(request.getPrice())
                 .availableItemCount(request.getAvailableItemCount())
                 .images(request.getImages())
+                .categoryId(request.getCategoryId())
+                .authorId(request.getAuthorId())
                 .build();
         gateway.send(command);
         return BaseResponse.ofSucceeded();
@@ -50,6 +52,8 @@ public class ProductCommandController {
                 .price(request.getPrice())
                 .availableItemCount(request.getAvailableItemCount())
                 .images(request.getImages())
+                .categoryId(request.getCategoryId())
+                .authorId(request.getAuthorId())
                 .build();
         gateway.send(command);
         return BaseResponse.ofSucceeded();

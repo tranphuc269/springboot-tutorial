@@ -1,14 +1,15 @@
-package com.bookstore.catalogservice.product.command.write_model.entity;
+package com.bookstore.catalogservice.product.query.read_model.entity;
 
-import com.bookstore.common.infrastructure.repo.model.BaseModel;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
-import java.util.List;
-import java.util.ArrayList;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
 
 @Getter
 @Setter
@@ -18,7 +19,7 @@ import java.util.Objects;
 @Table(name = "products")
 @Builder
 @AllArgsConstructor
-public class ProductCommandEntity extends BaseModel {
+public class ProductQueryEntity {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -47,11 +48,13 @@ public class ProductCommandEntity extends BaseModel {
     @Column(name = "author_id")
     private String authorId;
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProductCommandEntity that = (ProductCommandEntity) o;
+        ProductQueryEntity that = (ProductQueryEntity) o;
         return productId != null && Objects.equals(productId, that.productId);
     }
 
