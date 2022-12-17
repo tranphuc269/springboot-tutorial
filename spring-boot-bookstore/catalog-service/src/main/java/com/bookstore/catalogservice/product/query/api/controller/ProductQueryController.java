@@ -2,20 +2,19 @@ package com.bookstore.catalogservice.product.query.api.controller;
 
 
 import com.bookstore.catalogservice.product.query.api.queries.GetDetailProductQuery;
+import com.bookstore.catalogservice.product.query.api.queries.ProductsFilterQuery;
+import com.bookstore.catalogservice.product.query.read_model.query_request.ProductFilterRequest;
 import com.bookstore.catalogservice.product.query.read_model.response.ProductDetailResponse;
+import com.bookstore.catalogservice.product.query.read_model.response.ProductResponse;
 import com.bookstore.common.application.response.dto.BaseResponse;
 import com.bookstore.common.domain.exception.BusinessError;
-import com.bookstore.common.domain.exception.ExceptionCommon;
 import lombok.NoArgsConstructor;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @NoArgsConstructor
@@ -44,6 +43,24 @@ public class ProductQueryController {
                     .ofFailed(new BusinessError(404,
                             ignored.getMessage(), HttpStatus.NOT_FOUND)));
         }
+    }
+
+    @PostMapping("/filter")
+    public ResponseEntity<Object> getFilterProducts(@RequestBody ProductFilterRequest request) {
+        ProductsFilterQuery query = ProductsFilterQuery
+                .builder()
+                .categoryId(request.getCategoryId())
+                .authorId(request.getAuthorId())
+                .sort(request.getSort())
+                .limit(request.getLimit())
+                .offset(request.getOffset())
+                .build();
+        return ResponseEntity.ok(BaseResponse
+                .ofSucceeded(
+                        gateway
+                                .query(query,
+                                        ResponseTypes.multipleInstancesOf(ProductResponse.class))
+                                .join()));
     }
 
 }

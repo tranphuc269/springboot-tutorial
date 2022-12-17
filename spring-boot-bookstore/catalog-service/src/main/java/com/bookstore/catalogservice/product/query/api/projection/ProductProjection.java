@@ -12,16 +12,21 @@ import com.bookstore.catalogservice.category.data.CategoryRepository;
 import com.bookstore.catalogservice.category.data.dto.CategoryResponse;
 import com.bookstore.catalogservice.category.data.model.CategoryModel;
 import com.bookstore.catalogservice.product.query.api.queries.GetDetailProductQuery;
+import com.bookstore.catalogservice.product.query.api.queries.ProductsFilterQuery;
 import com.bookstore.catalogservice.product.query.read_model.ProductQueryRepository;
 import com.bookstore.catalogservice.product.query.read_model.entity.ProductQueryEntity;
 import com.bookstore.catalogservice.product.query.read_model.response.AttributeProductResponse;
 import com.bookstore.catalogservice.product.query.read_model.response.ProductDetailResponse;
+import com.bookstore.catalogservice.product.query.read_model.response.ProductResponse;
+import com.bookstore.catalogservice.product.query.read_model.specifications.ProductQuerySpecification;
 import com.bookstore.catalogservice.review.query.read_model.ReviewQueryRepository;
 import com.bookstore.common.domain.exception.BusinessError;
 import com.bookstore.common.domain.exception.ExceptionCommon;
 import org.axonframework.queryhandling.QueryHandler;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -60,18 +65,23 @@ public class ProductProjection {
             throw new ExceptionCommon(new BusinessError(404,
                     "Not found product", HttpStatus.NOT_FOUND));
         }
+        // get author
         AuthorModel authorModel = authorRepository
                 .findById(productQuery.get().getAuthorId()).get();
+        // get category
         CategoryModel categoryModel = categoryRepository
                 .findById(productQuery.get().getCategoryId()).get();
+        // get list attribute value
         List<AttributeProductResponse> attributes = new ArrayList<>();
         List<AttributeValueModel> attributeValueList = attributeValueRepository
                 .getAttributeValueModelsByProductId(
                         query.getProductId());
+        // get list attribute
         List<AttributeModel> attributeList = attributeRepository.
                 findAllByAttributeIds(attributeValueList.stream()
                         .map(AttributeValueModel::getAttributeId)
                         .collect(Collectors.toList()));
+        // map attribute to attribute response
         attributeList.forEach(attribute -> {
             AttributeProductResponse attributeProduct = new AttributeProductResponse();
             attributeProduct.setProductId(query.getProductId());
@@ -83,6 +93,7 @@ public class ProductProjection {
             attributeProduct.setValue(attributeValueModel.getValue());
             attributes.add(attributeProduct);
         });
+        // map data to product detail
         ProductDetailResponse
                 productDetailResponse = ProductDetailResponse
                 .builder()
@@ -111,5 +122,31 @@ public class ProductProjection {
                 .build();
 
         return productDetailResponse;
+    }
+
+
+    @QueryHandler
+    public List<ProductResponse> handle(ProductsFilterQuery query) {
+
+        Specification<ProductQueryEntity> queryByCategoryId = ProductQuerySpecification
+                .hasCategoryId(query.getCategoryId());
+        Specification<ProductQueryEntity> queryByAuthorId = ProductQuerySpecification
+                .hasAuthorId(query.getAuthorId());
+        Pageable pageable = PageRequest.of(query.getOffset(), query.getLimit());
+        List<ProductQueryEntity> products = productRepository
+                .findAll(Specification.where(queryByCategoryId.and(queryByAuthorId)),
+                        pageable).stream().collect(Collectors.toList());
+        return products.stream()
+                .map(productQueryEntity -> ProductResponse
+                        .builder()
+                        .productId(productQueryEntity.getProductId())
+                        .price(productQueryEntity.getPrice())
+                        .images(productQueryEntity.getImages())
+                        .quantitySold(productQueryEntity.getQuantitySold())
+                        .availableItemCount(productQueryEntity.getAvailableItemCount())
+                        .shortContent(productQueryEntity.getShortContent())
+                        .name(productQueryEntity.getName())
+                        .build())
+                .collect(Collectors.toList());
     }
 }

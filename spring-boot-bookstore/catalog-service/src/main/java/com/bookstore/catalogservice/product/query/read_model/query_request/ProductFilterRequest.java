@@ -1,4 +1,4 @@
-package com.bookstore.catalogservice.product.query.api.queries;
+package com.bookstore.catalogservice.product.query.read_model.query_request;
 
 
 import lombok.Builder;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Data
 @Builder
-public class GetProductsValue {
+public class ProductFilterRequest {
     private String authorId;
     private String categoryId;
 
