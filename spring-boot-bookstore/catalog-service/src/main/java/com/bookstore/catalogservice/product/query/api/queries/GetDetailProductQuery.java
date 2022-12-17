@@ -1,6 +1,5 @@
 package com.bookstore.catalogservice.product.query.api.queries;
 
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;

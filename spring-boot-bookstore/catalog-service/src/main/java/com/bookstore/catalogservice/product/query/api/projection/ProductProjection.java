@@ -109,6 +109,7 @@ public class ProductProjection {
                 .images(productQuery.get().getListImages())
                 .quantitySold(productQuery.get().getQuantitySold())
                 .build();
+
         return productDetailResponse;
     }
 }
