@@ -15,7 +15,7 @@ import java.util.UUID;
 @Aggregate
 public class ProductAggregate {
     @AggregateIdentifier
-    private String identify;
+    private String identity;
 
     private String productId;
 
@@ -63,7 +63,7 @@ public class ProductAggregate {
 
     @EventSourcingHandler
     public void on(CreateProductEvent event) {
-        this.identify = UUID.randomUUID().toString();
+        this.identity = UUID.randomUUID().toString();
         this.name = event.getName();
         this.shortContent = event.getShortContent();
         this.description = event.getDescription();
@@ -96,7 +96,7 @@ public class ProductAggregate {
 
     @EventSourcingHandler
     public void on(UpdateProductEvent event) {
-        this.identify = UUID.randomUUID().toString();
+        this.identity = UUID.randomUUID().toString();
         this.productId = event.getProductId();
         this.name = event.getName();
         this.shortContent = event.getShortContent();
@@ -122,7 +122,7 @@ public class ProductAggregate {
     @EventSourcingHandler
     public void on(DeleteProductEvent event) {
         this.status = 0;
-        this.identify = UUID.randomUUID().toString();
+        this.identity = UUID.randomUUID().toString();
         this.productId = event.getProductId();
     }
 
@@ -139,7 +139,7 @@ public class ProductAggregate {
     @EventSourcingHandler
     public void on(EnableProductEvent event) {
         this.status = 1;
-        this.identify = UUID.randomUUID().toString();
+        this.identity = UUID.randomUUID().toString();
         this.productId = event.getProductId();
     }
 

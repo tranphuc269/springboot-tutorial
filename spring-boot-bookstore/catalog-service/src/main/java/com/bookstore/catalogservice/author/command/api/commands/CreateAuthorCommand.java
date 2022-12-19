@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class CreateAuthorCommand {
-    private String identify;
+    private String identity;
     private String authorName;
     private String images;
     private String description;

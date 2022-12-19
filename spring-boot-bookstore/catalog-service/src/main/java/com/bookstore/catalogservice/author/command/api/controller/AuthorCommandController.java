@@ -31,7 +31,7 @@ public class AuthorCommandController {
                 .builder()
                 .authorName(request.getAuthorName())
                 .description(request.getDescription())
-                .identify(UUID.randomUUID().toString())
+                .identity(UUID.randomUUID().toString())
                 .images(request.getImages())
                 .build();
         gateway.send(command);

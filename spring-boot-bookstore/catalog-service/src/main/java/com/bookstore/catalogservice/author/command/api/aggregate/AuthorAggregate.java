@@ -19,7 +19,7 @@ import java.util.UUID;
 @Aggregate
 public class AuthorAggregate {
     @AggregateIdentifier
-    private String identify;
+    private String identity;
     private String authorId;
     private String name;
     private String images;
@@ -37,7 +37,7 @@ public class AuthorAggregate {
         CreateAuthorEvent event = CreateAuthorEvent
                 .builder()
                 .authorName(command.getAuthorName())
-                .identify(command.getIdentify())
+                .identity(command.getIdentity())
                 .description(command.getDescription())
                 .images(command.getImages())
                 .build();
@@ -46,7 +46,7 @@ public class AuthorAggregate {
 
     @EventSourcingHandler
     public void on(CreateAuthorEvent event) {
-        this.identify = event.getIdentify();
+        this.identity = event.getIdentity();
         this.authorId = null;
         this.images = event.getImages();
         this.name = event.getAuthorName();
@@ -73,7 +73,7 @@ public class AuthorAggregate {
     public void on(UpdateAuthorEvent event) {
         this.status = 1;
         this.name = event.getAuthorName();
-        this.identify = UUID.randomUUID().toString();
+        this.identity = UUID.randomUUID().toString();
         this.images = event.getImages();
         this.description = event.getDescription();
     }
@@ -91,7 +91,7 @@ public class AuthorAggregate {
     @EventSourcingHandler
     public void on(DeleteAuthorEvent event) {
         this.authorId = event.getAuthorId();
-        this.identify = UUID.randomUUID().toString();
+        this.identity = UUID.randomUUID().toString();
         this.status = 0;
     }
 
@@ -108,7 +108,7 @@ public class AuthorAggregate {
     @EventSourcingHandler
     public void on(EnableAuthorEvent event) {
         this.authorId = event.getAuthorId();
-        this.identify = UUID.randomUUID().toString();
+        this.identity = UUID.randomUUID().toString();
         this.status = 1;
     }
 

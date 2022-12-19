@@ -1,9 +1,9 @@
 package com.bookstore.catalogservice.common.cqrs;
 
 public abstract class QueryBase<T> {
-    private T identify;
+    private T identity;
 
-    public QueryBase(T identify){
-        this.identify = identify;
+    public QueryBase(T identity){
+        this.identity = identity;
     }
 }

@@ -19,7 +19,7 @@ import java.util.UUID;
 public class ReviewAggregate {
 
     @AggregateIdentifier
-    private String identify;
+    private String identity;
 
     private String reviewId;
 
@@ -48,7 +48,7 @@ public class ReviewAggregate {
 
     @EventSourcingHandler
     public void on(CreateReviewEvent event){
-        this.identify = UUID.randomUUID().toString();
+        this.identity = UUID.randomUUID().toString();
         this.productId = event.getProductId();
         this.userId = event.getUserId();
         this.reviewContent = event.getReviewContent();
@@ -71,7 +71,7 @@ public class ReviewAggregate {
 
     @EventSourcingHandler
     public void on(UpdateReviewEvent event){
-        this.identify = UUID.randomUUID().toString();
+        this.identity = UUID.randomUUID().toString();
         this.reviewId = event.getReviewId();
         this.productId = event.getProductId();
         this.userId = event.getUserId();
@@ -91,7 +91,7 @@ public class ReviewAggregate {
 
     @EventSourcingHandler
     public void on(DeleteReviewEvent event){
-        this.identify = UUID.randomUUID().toString();
+        this.identity = UUID.randomUUID().toString();
         this.reviewId = event.getReviewId();
     }
 
