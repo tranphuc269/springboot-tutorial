@@ -1,4 +1,18 @@
 package com.bookstore.orderservice.cart_item.command.api.events;
 
-public class RemoveCartItemEvent {
+import com.bookstore.common.infrastructure.axon.BaseEvent;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class RemoveCartItemEvent extends BaseEvent<String> {
+    private String cartItemId;
+
+    public RemoveCartItemEvent(String id, String cartItemId) {
+        super(id);
+        this.cartItemId = cartItemId;
+    }
+
+
 }

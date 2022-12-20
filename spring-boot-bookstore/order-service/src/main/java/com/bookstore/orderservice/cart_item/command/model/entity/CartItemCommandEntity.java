@@ -2,10 +2,7 @@ package com.bookstore.orderservice.cart_item.command.model.entity;
 
 
 import com.bookstore.common.infrastructure.repo.model.BaseModel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,6 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class CartItemCommandEntity extends BaseModel {
 
     @Id

@@ -11,12 +11,9 @@ import java.math.BigDecimal;
 @Setter
 public class CreateCartCommand extends BaseCommand<String> {
     private String userId;
-    private BigDecimal totalPrice;
 
-
-    public CreateCartCommand(String id, String userId, BigDecimal totalPrice) {
+    public CreateCartCommand(String id, String userId) {
         super(id);
         this.userId = userId;
-        this.totalPrice = totalPrice;
     }
 }
