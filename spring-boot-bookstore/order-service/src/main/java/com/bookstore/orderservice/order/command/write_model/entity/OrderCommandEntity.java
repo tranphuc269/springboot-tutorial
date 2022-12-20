@@ -32,9 +32,12 @@ public class OrderCommandEntity extends BaseModel {
 
 
     @Column(name = "payment_method")
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
 
     @Column(name = "user_id")
     private String userId;
+
+    @Column(name = "payment_status")
+    private String paymentStatus;
 
 }

@@ -23,58 +23,50 @@ public class OrderCommandAggregate {
 
     private PaymentMethod paymentMethod;
 
-    protected OrderCommandAggregate(){}
+    protected OrderCommandAggregate() {
+    }
 
 
     // create order
     @CommandHandler
-    public OrderCommandAggregate(CreateOrderCommand command){
-        CreateOrderEvent event = CreateOrderEvent
-                .builder()
-                .orderCheckingId(command.getOrderCheckingId())
-                .paymentMethod(command.getPaymentMethod())
-                .build();
+    public OrderCommandAggregate(CreateOrderCommand command) {
+        CreateOrderEvent event = new CreateOrderEvent(
+                command.getOrderCheckingId(),
+                command.getPaymentMethod());
         AggregateLifecycle.apply(event);
     }
 
     @EventSourcingHandler
-    public void on(CreateOrderEvent event){
-        this.orderCheckingId = event.getOrderCheckingId();
+    public void on(CreateOrderEvent event) {
+        this.orderCheckingId = event.getId();
         this.orderStatus = OrderStatus.CREATED;
         this.paymentMethod = event.getPaymentMethod();
     }
 
     // confirm
     @CommandHandler
-    public OrderCommandAggregate(ConfirmOrderCommand command){
-        ConfirmOrderEvent event = ConfirmOrderEvent
-                .builder()
-                .orderCheckingId(command.getOrderCheckingId())
-                .orderId(command.getOrderId())
-                .build();
+    public void on(ConfirmOrderCommand command) {
+        ConfirmOrderEvent event = new ConfirmOrderEvent(command.getOrderCheckingId(),
+                command.getOrderId());
         AggregateLifecycle.apply(event);
     }
 
     @EventSourcingHandler
-    public void on(ConfirmOrderEvent event){
-//        this.orderCheckingId = event.getOrderCheckingId();
+    public void on(ConfirmOrderEvent event) {
         this.orderId = event.getOrderId();
         this.orderStatus = OrderStatus.CONFIRMED;
     }
 
     // cancel order
     @CommandHandler
-    public OrderCommandAggregate(CancelOrderCommand command){
-        CancelOrderEvent event = CancelOrderEvent
-                .builder()
-                .orderCheckingId(command.getOrderCheckingId())
-                .orderId(command.getOrderId())
-                .build();
+    public void on(CancelOrderCommand command) {
+        CancelOrderEvent event = new CancelOrderEvent(command.getOrderCheckingId(),
+                command.getOrderId());
         AggregateLifecycle.apply(event);
     }
 
     @EventSourcingHandler
-    public void on(CancelOrderEvent event){
+    public void on(CancelOrderEvent event) {
 //        this.orderCheckingId = event.getOrderCheckingId();
         this.orderId = event.getOrderId();
         this.orderStatus = OrderStatus.CANCEL;
@@ -82,34 +74,30 @@ public class OrderCommandAggregate {
 
     // ship order
     @CommandHandler
-    public OrderCommandAggregate(ShipOrderCommand command){
-        ShipOrderEvent event = ShipOrderEvent
-                .builder()
-                .orderCheckingId(command.getOrderCheckingId())
-                .orderId(command.getOrderId())
-                .build();
+    public void on(ShipOrderCommand command) {
+        ShipOrderEvent event = new ShipOrderEvent(command.getOrderCheckingId(),
+                command.getOrderId());
         AggregateLifecycle.apply(event);
     }
 
     @EventSourcingHandler
-    public void on(ShipOrderEvent event){
+    public void on(ShipOrderEvent event) {
 //        this.orderCheckingId = event.getOrderCheckingId();
         this.orderId = event.getOrderId();
         this.orderStatus = OrderStatus.SHIPPED;
     }
+
     // success order
     @CommandHandler
-    public OrderCommandAggregate(SuccessOrderCommand command){
-        SuccessOrderEvent event = SuccessOrderEvent
-                .builder()
-                .orderCheckingId(command.getOrderCheckingId())
-                .orderId(command.getOrderId())
-                .build();
+    public void on(SuccessOrderCommand command) {
+        SuccessOrderEvent event = new SuccessOrderEvent(
+                command.getOrderCheckingId(),
+                command.getOrderId());
         AggregateLifecycle.apply(event);
     }
 
     @EventSourcingHandler
-    public void on(SuccessOrderEvent event){
+    public void on(SuccessOrderEvent event) {
 //        this.orderCheckingId = event.getOrderCheckingId();
         this.orderId = event.getOrderId();
         this.orderStatus = OrderStatus.SUCCESSED;
@@ -117,17 +105,14 @@ public class OrderCommandAggregate {
 
     // return order
     @CommandHandler
-    public OrderCommandAggregate(ReturnOrderCommand command){
-        ReturnOrderEvent event = ReturnOrderEvent
-                .builder()
-                .orderCheckingId(command.getOrderCheckingId())
-                .orderId(command.getOrderId())
-                .build();
+    public void on(ReturnOrderCommand command) {
+        ReturnOrderEvent event = new ReturnOrderEvent(command.getOrderCheckingId(),
+                command.getOrderId());
         AggregateLifecycle.apply(event);
     }
 
     @EventSourcingHandler
-    public void on(ReturnOrderEvent event){
+    public void on(ReturnOrderEvent event) {
 //        this.orderCheckingId = event.getOrderCheckingId();
         this.orderId = event.getOrderId();
         this.orderStatus = OrderStatus.SUCCESSED;
