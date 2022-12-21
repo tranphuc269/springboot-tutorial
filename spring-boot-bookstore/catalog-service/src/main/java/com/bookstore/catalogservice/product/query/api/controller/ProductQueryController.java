@@ -1,8 +1,10 @@
 package com.bookstore.catalogservice.product.query.api.controller;
 
 
+import com.bookstore.catalogservice.product.query.api.queries.AddProductToCartQuery;
 import com.bookstore.catalogservice.product.query.api.queries.GetDetailProductQuery;
 import com.bookstore.catalogservice.product.query.api.queries.ProductsFilterQuery;
+import com.bookstore.catalogservice.product.query.read_model.query_request.ProductAddToCartRequest;
 import com.bookstore.catalogservice.product.query.read_model.query_request.ProductFilterRequest;
 import com.bookstore.catalogservice.product.query.read_model.response.ProductDetailResponse;
 import com.bookstore.catalogservice.product.query.read_model.response.ProductResponse;
@@ -60,6 +62,21 @@ public class ProductQueryController {
                         gateway
                                 .query(query,
                                         ResponseTypes.multipleInstancesOf(ProductResponse.class))
+                                .join()));
+    }
+
+    @PostMapping("/add-to-cart")
+    public ResponseEntity<Object> addProductToCart(@RequestBody ProductAddToCartRequest request) {
+        AddProductToCartQuery query = AddProductToCartQuery
+                .builder()
+                .cartId("ff8080818533008b01853300906a0000")
+                .productId(request.getProductId())
+                .build();
+        return ResponseEntity.ok(BaseResponse
+                .ofSucceeded(
+                        gateway
+                                .query(query,
+                                        ResponseTypes.instanceOf(String.class))
                                 .join()));
     }
 

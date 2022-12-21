@@ -1,7 +1,10 @@
+server:
+  port: ${port:9001}
 
 spring:
   application:
     name: catalog-service
+
   flyway:
     table: catalog_service_flyway_history
     baseline-on-migrate: true

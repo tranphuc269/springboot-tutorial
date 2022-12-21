@@ -11,6 +11,8 @@ import com.bookstore.catalogservice.author.data.model.AuthorModel;
 import com.bookstore.catalogservice.category.data.CategoryRepository;
 import com.bookstore.catalogservice.category.data.dto.CategoryResponse;
 import com.bookstore.catalogservice.category.data.model.CategoryModel;
+import com.bookstore.catalogservice.infrastructure.CatalogKafkaProducer;
+import com.bookstore.catalogservice.product.query.api.queries.AddProductToCartQuery;
 import com.bookstore.catalogservice.product.query.api.queries.GetDetailProductQuery;
 import com.bookstore.catalogservice.product.query.api.queries.ProductsFilterQuery;
 import com.bookstore.catalogservice.product.query.read_model.ProductQueryRepository;
@@ -22,6 +24,8 @@ import com.bookstore.catalogservice.product.query.read_model.specifications.Prod
 import com.bookstore.catalogservice.review.query.read_model.ReviewQueryRepository;
 import com.bookstore.common.domain.exception.BusinessError;
 import com.bookstore.common.domain.exception.ExceptionCommon;
+import com.bookstore.common.infrastructure.kafka.product_order.KafkaSendProductCreateCartItem;
+import com.bookstore.common.utils.KafkaTopicUtils;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -54,6 +58,9 @@ public class ProductProjection {
     private AttributeRepository attributeRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private CatalogKafkaProducer kafkaProducer;
 
 
     // query detail product
@@ -148,5 +155,26 @@ public class ProductProjection {
                         .name(productQueryEntity.getName())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    @QueryHandler
+    public String handle(AddProductToCartQuery query){
+        Optional<ProductQueryEntity> entityOptional =
+                productRepository.findById(query.getProductId());
+        if(entityOptional.isEmpty()){
+            throw new RuntimeException("Not found product");
+        }
+        kafkaProducer.send(KafkaTopicUtils.TOPIC_ADD_TO_CART,
+                KafkaSendProductCreateCartItem
+                        .builder()
+                        .cartId(query.getCartId())
+                        .quantity(1)
+                        .productId(entityOptional.get().getProductId())
+                        .productName(entityOptional.get().getName())
+                        .images(entityOptional.get().getImages())
+                        .productShortDescription(entityOptional.get().getShortContent())
+                        .productPrice(entityOptional.get().getPrice())
+                        .build());
+        return "ok";
     }
 }

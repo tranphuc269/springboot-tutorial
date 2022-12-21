@@ -1,16 +1,16 @@
-package com.bookstore.orderservice.cart_item.command.model.dto;
+package com.bookstore.common.infrastructure.kafka.product_order;
 
 
-import lombok.*;
-
-
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Builder
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class AddProductToCartRequest {
+public class KafkaSendProductCreateCartItem {
     private String cartId;
     private int quantity;
     private String productId;

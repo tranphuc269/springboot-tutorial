@@ -4,7 +4,6 @@ package com.bookstore.orderservice.cart_item.command.api.controller;
 import com.bookstore.common.application.response.dto.BaseResponse;
 import com.bookstore.orderservice.cart_item.command.api.commands.AddCartItemCommand;
 import com.bookstore.orderservice.cart_item.command.api.commands.RemoveCartItemCommand;
-import com.bookstore.orderservice.cart_item.command.model.dto.AddProductToCartRequest;
 import com.bookstore.orderservice.cart_item.command.model.dto.RemoveCartItemRequest;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -21,21 +20,21 @@ public class CartItemCommandController {
     @Autowired
     private CommandGateway gateway;
 
-    @PostMapping
-    public BaseResponse<Void> createCartItem(
-            @RequestBody AddProductToCartRequest request) {
-        AddCartItemCommand command = new AddCartItemCommand(UUID.randomUUID().toString(),
-                request.getCartId(),
-                request.getQuantity(),
-                request.getProductId(),
-                request.getProductName(),
-                request.getImages(),
-                request.getProductId(),
-                request.getProductPrice()
-        );
-        gateway.sendAndWait(command);
-        return BaseResponse.ofSucceeded();
-    }
+//    @PostMapping
+//    public BaseResponse<Void> createCartItem(
+//            @RequestBody AddProductToCartRequest request) {
+//        AddCartItemCommand command = new AddCartItemCommand(UUID.randomUUID().toString(),
+//                request.getCartId(),
+//                request.getQuantity(),
+//                request.getProductId(),
+//                request.getProductName(),
+//                request.getImages(),
+//                request.getProductId(),
+//                request.getProductPrice()
+//        );
+//        gateway.sendAndWait(command);
+//        return BaseResponse.ofSucceeded();
+//    }
 
     @DeleteMapping
     public BaseResponse<Void> deleteItem(@RequestBody RemoveCartItemRequest request){
