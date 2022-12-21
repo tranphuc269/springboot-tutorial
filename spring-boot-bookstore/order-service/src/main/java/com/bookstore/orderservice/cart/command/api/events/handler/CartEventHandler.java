@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
+import java.util.Date;
 import java.util.UUID;
 
 @Component
@@ -29,6 +30,9 @@ public class CartEventHandler implements ICartEventHandler {
                 .builder()
                 .userId(event.getUserId())
                 .build();
+        entity.setCreateTime(new Date());
+        entity.setStatus(1);
+        entity.setUpdateTime(new Date());
         cartRepository.save(entity);
     }
 

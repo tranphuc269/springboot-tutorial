@@ -33,6 +33,7 @@ public class CartItemProjection {
                         .productName(entity.getProductName())
                         .productPrice(entity.getProductPrice())
                         .productShortContent(entity.getProductShortContent())
+                        .quantity(entity.getQuantity())
                         .build())
                 .collect(Collectors.toList());
         return responses;

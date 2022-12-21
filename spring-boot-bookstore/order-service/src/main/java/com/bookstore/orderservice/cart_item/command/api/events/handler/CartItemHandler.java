@@ -49,6 +49,7 @@ public class CartItemHandler implements ICartItemHandler {
                     .productName(event.getProductName())
                     .images(event.getImages())
                     .productPrice(event.getProductPrice())
+                    .productShortContent(event.getProductShortDescription())
                     .build();
             entity.setStatus(1);
             entity.setCreateTime(new Date());

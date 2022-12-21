@@ -49,7 +49,7 @@ public class CartCommandAggregate {
 
     @EventSourcingHandler
     public void on(RemoveAllCartItemEvent event) {
-        this.userId = event.getUserId();
+        this.cartId = event.getCartId();
         this.id = event.getId();
     }
 
