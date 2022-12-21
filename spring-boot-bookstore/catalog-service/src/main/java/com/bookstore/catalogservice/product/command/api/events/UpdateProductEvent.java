@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
-import java.math.BigDecimal;
+
 
 @Data
 @Getter
@@ -17,7 +17,7 @@ public class UpdateProductEvent {
 
     private String description;
 
-    private BigDecimal price;
+    private double price;
 
     private int availableItemCount;
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
-import java.math.BigDecimal;
+
 
 
 @Data
@@ -19,7 +19,7 @@ public class ProductResponse {
     private String name;
 
     private String shortContent;
-    private BigDecimal price;
+    private double price;
 
     private int availableItemCount;
     private String images;

@@ -4,11 +4,11 @@ import com.bookstore.common.infrastructure.axon.BaseEvent;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
+
 
 @Getter
 @Setter
-public class CreateCartItemEvent extends BaseEvent<String> {
+public class AddCartItemEvent extends BaseEvent<String> {
     private String cartId;
     private int quantity;
 
@@ -17,15 +17,15 @@ public class CreateCartItemEvent extends BaseEvent<String> {
     private String images;
     private String productShortDescription;
 
-    private BigDecimal productPrice;
+    private double productPrice;
 
-    public CreateCartItemEvent(String id,
-                               String cartId,
-                               String productId,
-                               String productName,
-                               String productShortDescription,
-                               String images,
-                               BigDecimal productPrice) {
+    public AddCartItemEvent(String id,
+                            String cartId,
+                            String productId,
+                            String productName,
+                            String productShortDescription,
+                            String images,
+                            double productPrice) {
         super(id);
         this.quantity = 1;
         this.cartId = cartId;

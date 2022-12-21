@@ -4,11 +4,11 @@ import com.bookstore.common.infrastructure.axon.BaseCommand;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
+
 
 @Getter
 @Setter
-public class CreateCartItemCommand extends BaseCommand<String> {
+public class AddCartItemCommand extends BaseCommand<String> {
     private String cartId;
     private int quantity;
     private String productId;
@@ -16,16 +16,16 @@ public class CreateCartItemCommand extends BaseCommand<String> {
     private String images;
     private String productShortDescription;
 
-    private BigDecimal productPrice;
+    private double productPrice;
 
-    public CreateCartItemCommand(String id,
-                                 String cartId,
-                                 int quantity,
-                                 String productName,
-                                 String productShortDescription,
-                                 String images,
-                                 String productId,
-                                 BigDecimal productPrice
+    public AddCartItemCommand(String id,
+                              String cartId,
+                              int quantity,
+                              String productName,
+                              String productShortDescription,
+                              String images,
+                              String productId,
+                              double productPrice
     ) {
         super(id);
         this.cartId = cartId;

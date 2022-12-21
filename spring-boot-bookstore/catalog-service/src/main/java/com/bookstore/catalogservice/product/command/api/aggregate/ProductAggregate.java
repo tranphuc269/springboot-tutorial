@@ -9,7 +9,7 @@ import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
-import java.math.BigDecimal;
+
 import java.util.UUID;
 
 @Aggregate
@@ -25,7 +25,7 @@ public class ProductAggregate {
 
     private String description;
 
-    private BigDecimal price;
+    private double price;
 
     private int availableItemCount;
 

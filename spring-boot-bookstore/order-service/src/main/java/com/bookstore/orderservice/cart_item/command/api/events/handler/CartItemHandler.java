@@ -2,10 +2,9 @@ package com.bookstore.orderservice.cart_item.command.api.events.handler;
 
 import com.bookstore.common.domain.exception.BusinessError;
 import com.bookstore.common.domain.exception.ExceptionCommon;
-import com.bookstore.orderservice.cart_item.command.api.events.CreateCartItemEvent;
+import com.bookstore.orderservice.cart_item.command.api.events.AddCartItemEvent;
 import com.bookstore.orderservice.cart_item.command.api.events.RemoveAllCartItemEvent;
 import com.bookstore.orderservice.cart_item.command.api.events.RemoveCartItemEvent;
-import com.bookstore.orderservice.cart_item.command.api.events.UpdateCartItemEvent;
 import com.bookstore.orderservice.cart_item.command.model.CartItemCommandRepository;
 import com.bookstore.orderservice.cart_item.command.model.entity.CartItemCommandEntity;
 import org.axonframework.eventhandling.EventHandler;
@@ -14,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -27,20 +28,34 @@ public class CartItemHandler implements ICartItemHandler {
 
     @EventHandler
     @Override
-    public void on(CreateCartItemEvent event) {
-        CartItemCommandEntity entity = CartItemCommandEntity
-                .builder()
-                .cartId(event.getCartId())
-                .productId(event.getProductId())
-                .quantity(event.getQuantity())
-                .productName(event.getProductName())
-                .images(event.getImages())
-                .productPrice(event.getProductPrice())
-                .build();
-        entity.setStatus(1);
-        entity.setCreateTime(new Date());
-        entity.setUpdateTime(new Date());
-        repository.save(entity);
+    public void on(AddCartItemEvent event) {
+        List<CartItemCommandEntity> carts = repository.findAllByCartId(event.getCartId());
+        if (carts
+                .stream()
+                .map(CartItemCommandEntity::getProductId)
+                .collect(Collectors
+                        .toList())
+                .contains(event.getProductId())) {
+            CartItemCommandEntity entity =
+                    repository.findByProductId(event.getProductId()).get();
+            entity.setQuantity(entity.getQuantity() + 1);
+            repository.save(entity);
+        } else {
+            CartItemCommandEntity entity = CartItemCommandEntity
+                    .builder()
+                    .cartId(event.getCartId())
+                    .productId(event.getProductId())
+                    .quantity(event.getQuantity())
+                    .productName(event.getProductName())
+                    .images(event.getImages())
+                    .productPrice(event.getProductPrice())
+                    .build();
+            entity.setStatus(1);
+            entity.setCreateTime(new Date());
+            entity.setUpdateTime(new Date());
+            repository.save(entity);
+        }
+
     }
 
     @EventHandler
@@ -57,22 +72,6 @@ public class CartItemHandler implements ICartItemHandler {
         }
     }
 
-
-    @Override
-    @EventHandler
-    public void on(UpdateCartItemEvent event) {
-        Optional<CartItemCommandEntity> entityOptional =
-                repository.findById(event.getCartItemId());
-        if (entityOptional.isEmpty()) {
-            throw new ExceptionCommon(new BusinessError(404,
-                    "Not found cart item",
-                    HttpStatus.NOT_FOUND));
-        } else {
-            entityOptional.get().setUpdateTime(new Date());
-            entityOptional.get().setQuantity(event.getQuantity());
-            repository.save(entityOptional.get());
-        }
-    }
 
     @EventHandler
     @Override

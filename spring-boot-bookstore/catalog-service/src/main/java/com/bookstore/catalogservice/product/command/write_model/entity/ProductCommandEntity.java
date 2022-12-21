@@ -7,7 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.*;
-import java.math.BigDecimal;
+
 import java.util.Objects;
 
 @Getter
@@ -32,7 +32,7 @@ public class ProductCommandEntity extends BaseModel {
     private String description;
     @Column(name = "short_content", columnDefinition = "TEXT")
     private String shortContent;
-    private BigDecimal price;
+    private double price;
 
     @Column(name = "available_item_count")
     private int availableItemCount;

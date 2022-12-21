@@ -1,5 +1,4 @@
-package com.bookstore.orderservice.cart_item.command.model.entity;
-
+package com.bookstore.orderservice.cart_item.query.model.entity;
 
 import com.bookstore.common.infrastructure.repo.model.BaseModel;
 import lombok.*;
@@ -7,6 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "cart_items")
@@ -15,11 +16,11 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Builder
-public class CartItemCommandEntity extends BaseModel {
+public class CartItemQueryEntity extends BaseModel {
 
     @Id
-    @GeneratedValue(generator="cart_item_id-uuid")
-    @GenericGenerator(name="cart_item_id-uuid", strategy = "uuid")
+    @GeneratedValue(generator = "cart_item_id-uuid")
+    @GenericGenerator(name = "cart_item_id-uuid", strategy = "uuid")
     @Column(name = "cart_item_id", updatable = false, nullable = false)
     private String cartItemId;
 
@@ -42,5 +43,15 @@ public class CartItemCommandEntity extends BaseModel {
     @Column(name = "quantity", updatable = false, nullable = false)
     private int quantity;
 
-
+    public List<String> getListImages() {
+        List<String> imgs = new ArrayList<>
+                (List
+                        .of(this.getImages()
+                                .replace(']', ' ')
+                                .replace('[', ' ')
+                                .trim()
+                                .split(",")));
+        imgs.replaceAll(String::trim);
+        return imgs;
+    }
 }

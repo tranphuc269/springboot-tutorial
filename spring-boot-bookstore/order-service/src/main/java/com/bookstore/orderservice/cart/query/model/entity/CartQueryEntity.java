@@ -1,10 +1,10 @@
-package com.bookstore.orderservice.cart.command.model.entity;
+package com.bookstore.orderservice.cart.query.model.entity;
+
 import com.bookstore.common.infrastructure.repo.model.BaseModel;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-
 
 @Entity
 @Table(name = "carts")
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Builder
-public class CartCommandEntity extends BaseModel {
+public class CartQueryEntity extends BaseModel {
     @Id
     @GeneratedValue(generator="cart-uuid")
     @GenericGenerator(name="cart-uuid", strategy = "uuid")

@@ -1,21 +1,19 @@
 package com.bookstore.orderservice.cart_item.command.api.aggregate;
 
 
-import com.bookstore.orderservice.cart_item.command.api.commands.CreateCartItemCommand;
+import com.bookstore.orderservice.cart_item.command.api.commands.AddCartItemCommand;
 import com.bookstore.orderservice.cart_item.command.api.commands.RemoveAllCartItemCommand;
 import com.bookstore.orderservice.cart_item.command.api.commands.RemoveCartItemCommand;
-import com.bookstore.orderservice.cart_item.command.api.commands.UpdateCartItemCommand;
-import com.bookstore.orderservice.cart_item.command.api.events.CreateCartItemEvent;
+import com.bookstore.orderservice.cart_item.command.api.events.AddCartItemEvent;
 import com.bookstore.orderservice.cart_item.command.api.events.RemoveAllCartItemEvent;
 import com.bookstore.orderservice.cart_item.command.api.events.RemoveCartItemEvent;
-import com.bookstore.orderservice.cart_item.command.api.events.UpdateCartItemEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
-import java.math.BigDecimal;
+
 import java.util.UUID;
 
 @Aggregate
@@ -29,15 +27,15 @@ public class CartItemAggregate {
     private String productShortContent;
     private String images;
     private int quantity;
-    private BigDecimal productPrice;
+    private double productPrice;
 
     public CartItemAggregate() {
     }
 
-    // create cart item
+    // add cart item
     @CommandHandler
-    public CartItemAggregate(CreateCartItemCommand command) {
-        CreateCartItemEvent event = new CreateCartItemEvent(
+    public CartItemAggregate(AddCartItemCommand command) {
+        AddCartItemEvent event = new AddCartItemEvent(
                 UUID.randomUUID().toString(),
                 command.getCartId(),
                 command.getProductId(),
@@ -50,7 +48,7 @@ public class CartItemAggregate {
     }
 
     @EventSourcingHandler
-    public void on(CreateCartItemEvent event) {
+    public void on(AddCartItemEvent event) {
         this.id = event.getId();
         this.cartId = event.getCartId();
         this.productId = event.getProductId();
@@ -60,7 +58,7 @@ public class CartItemAggregate {
         this.productShortContent = event.getProductShortDescription();
     }
 
-    // remove order item
+    // remove cart item
     @CommandHandler
     public CartItemAggregate(RemoveCartItemCommand command) {
         RemoveCartItemEvent event = new RemoveCartItemEvent(UUID.randomUUID().toString(),
@@ -72,23 +70,6 @@ public class CartItemAggregate {
     public void on(RemoveCartItemEvent event) {
         this.id = event.getId();
         this.cartItemId = event.getCartItemId();
-    }
-
-    // update order item
-
-    @CommandHandler
-    public CartItemAggregate(UpdateCartItemCommand command) {
-        UpdateCartItemEvent event = new UpdateCartItemEvent(UUID.randomUUID().toString(),
-                command.getCartItemId(),
-                command.getQuantity());
-        AggregateLifecycle.apply(event);
-    }
-
-    @EventSourcingHandler
-    public void on(UpdateCartItemEvent event) {
-        this.id = event.getId();
-        this.cartItemId = event.getCartItemId();
-        this.quantity = event.getQuantity();
     }
 
     // delete all cart

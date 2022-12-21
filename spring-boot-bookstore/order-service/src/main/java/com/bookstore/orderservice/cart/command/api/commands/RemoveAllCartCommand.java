@@ -8,9 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RemoveAllCartCommand extends BaseCommand<String> {
-    private String userId;
+    private String cartId;
     public RemoveAllCartCommand(String id, String userId) {
         super(id);
-        this.userId = userId;
+        this.cartId = userId;
     }
 }
