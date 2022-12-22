@@ -1,5 +1,6 @@
 package com.bookstore.orderservice.order.command.api.events.handler;
 
+import com.bookstore.orderservice.cart_item.command.api.commands.RemoveAllCartItemCommand;
 import com.bookstore.orderservice.cart_item.query.api.queries.GetListCartItemQuery;
 import com.bookstore.orderservice.cart_item.query.model.dto.CartItemResponse;
 import com.bookstore.orderservice.order.command.api.events.*;
@@ -15,7 +16,10 @@ import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -35,8 +39,8 @@ public class OrderEventHandlerImpl implements IOrderEventHandler {
     @Autowired
     private QueryGateway queryGateway;
 
-    @EventHandler
     @Override
+    @EventHandler
     public void on(CreateOrderEvent event) {
         System.out.println("EventHandler : CreateOrderEvent");
         OrderCommandEntity entity = OrderCommandEntity
@@ -50,8 +54,8 @@ public class OrderEventHandlerImpl implements IOrderEventHandler {
         entity.setCreateTime(new Date());
         entity.setUpdateTime(new Date());
         OrderCommandEntity save = repository.save(entity);
-        createOrderItem(event.getCartId(), save.getOrderId());
-        createShippingAddress(save.getOrderId());
+//        createOrderItem(event.getCartId(), save.getOrderId());
+//        createShippingAddress(save.getOrderId());
     }
 
     private void createOrderItem(String cartId, String orderId) {
@@ -60,6 +64,7 @@ public class OrderEventHandlerImpl implements IOrderEventHandler {
                         .cartId(cartId)
                         .build(), ResponseTypes.multipleInstancesOf(CartItemResponse.class))
                 .join();
+        commandGateway.send(new RemoveAllCartItemCommand(UUID.randomUUID().toString(), cartId));
         List<OrderItemCommandEntity> entities = cartItemResponses
                 .stream().map(cart -> OrderItemCommandEntity
                         .builder()

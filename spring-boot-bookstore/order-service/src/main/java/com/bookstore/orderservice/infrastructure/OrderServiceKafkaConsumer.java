@@ -49,8 +49,8 @@ public class OrderServiceKafkaConsumer {
         AddCartItemCommand command = new AddCartItemCommand(UUID.randomUUID().toString(),
                 request.getCartId(),
                 request.getQuantity(),
-                request.getProductId(),
                 request.getProductName(),
+                request.getProductShortDescription(),
                 request.getImages(),
                 request.getProductId(),
                 request.getProductPrice()

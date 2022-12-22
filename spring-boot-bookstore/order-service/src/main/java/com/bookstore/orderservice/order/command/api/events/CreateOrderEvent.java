@@ -22,4 +22,13 @@ public class CreateOrderEvent extends BaseEvent<String> {
         this.paymentMethod = paymentMethod;
         this.cartId = cartId;
     }
+
+    @Override
+    public String toString() {
+        return "CreateOrderEvent{" +
+                "paymentMethod=" + paymentMethod +
+                ", orderStatus=" + orderStatus +
+                ", cartId='" + cartId + '\'' +
+                '}';
+    }
 }

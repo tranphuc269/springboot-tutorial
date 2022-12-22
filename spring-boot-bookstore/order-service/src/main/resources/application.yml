@@ -58,3 +58,10 @@ spring:
 axon:
   axonserver:
     servers: localhost:8124
+    command-flow-control:
+      initial-nr-of-permits: 500
+  eventhandling:
+    processors:
+      NAME_OF_THE_PROCESSOR:
+        mode: subscribing
+

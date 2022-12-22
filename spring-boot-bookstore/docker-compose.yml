@@ -33,13 +33,15 @@ services:
     ports:
       - '6379:6379'
     command: redis-server --save 20 1 --loglevel warning
-  axonserver:
+  axon-server:
+    # docker run -d --name my-axon-server -p 8024:8024 -p 8124:8124 axoniq/axonserver
     image: axoniq/axonserver
-    hostname: axonserver
+    container_name: axon-server
+    healthcheck:
+      test: curl -f http://localhost:8024/actuator/health || exit 1;
     ports:
-      - '8024:8024'
-      - '8124:8124'
-      - '8224:8224'
+      - "8024:8024"
+      - "8124:8124"
 #
 #  zookeeper:
 #    image: confluentinc/cp-zookeeper:latest

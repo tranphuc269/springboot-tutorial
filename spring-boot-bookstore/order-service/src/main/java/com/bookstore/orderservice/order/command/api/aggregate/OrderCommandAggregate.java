@@ -30,10 +30,9 @@ public class OrderCommandAggregate {
     // create order
     @CommandHandler
     public OrderCommandAggregate(CreateOrderCommand command) {
-        CreateOrderEvent event = new CreateOrderEvent(
+        AggregateLifecycle.apply(new CreateOrderEvent(
                 command.getOrderCheckingId(),
-                command.getPaymentMethod(), command.getCartId());
-        AggregateLifecycle.apply(event);
+                command.getPaymentMethod(), command.getCartId()));
     }
 
     @EventSourcingHandler
@@ -41,6 +40,7 @@ public class OrderCommandAggregate {
         this.orderCheckingId = event.getId();
         this.orderStatus = OrderStatus.CREATED;
         this.paymentMethod = event.getPaymentMethod();
+        System.out.println("EventSourcingHandler : " + event);
     }
 
     // confirm

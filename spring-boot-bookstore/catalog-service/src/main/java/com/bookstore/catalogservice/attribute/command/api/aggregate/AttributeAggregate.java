@@ -27,7 +27,6 @@ public class AttributeAggregate {
                 .attributeId(command.getAttributeId())
                 .name(command.getName())
                 .build();
-        System.out.println("Send event : " + event);
         AggregateLifecycle.apply(event);
     }
 

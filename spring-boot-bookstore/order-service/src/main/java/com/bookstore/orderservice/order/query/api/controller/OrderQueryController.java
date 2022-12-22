@@ -27,7 +27,6 @@ public class OrderQueryController {
                 .builder()
                 .orderCheckingId(orderCheckingId)
                 .build();
-        System.out.println("query : " + query.getOrderCheckingId());
         return gateway.query(query,
                         ResponseTypes.multipleInstancesOf(Object.class))
                 .join();

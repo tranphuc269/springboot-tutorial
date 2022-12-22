@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.UUID;
 
 @RestController
 @NoArgsConstructor
@@ -32,7 +33,7 @@ public class OrderCommandController {
         }
         CreateOrderCommand command = CreateOrderCommand
                 .builder()
-                .orderCheckingId("order" + (new Date()).getTime())
+                .orderCheckingId(UUID.randomUUID().toString())
                 .cartId(request.getCartId())
                 .paymentMethod(paymentMethod)
                 .build();
