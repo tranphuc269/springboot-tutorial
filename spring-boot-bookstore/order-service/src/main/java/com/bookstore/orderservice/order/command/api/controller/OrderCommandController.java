@@ -33,6 +33,7 @@ public class OrderCommandController {
         CreateOrderCommand command = CreateOrderCommand
                 .builder()
                 .orderCheckingId("order" + (new Date()).getTime())
+                .cartId(request.getCartId())
                 .paymentMethod(paymentMethod)
                 .build();
         return BaseResponse.ofSucceeded(gateway.sendAndWait(command).toString());

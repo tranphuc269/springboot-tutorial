@@ -13,4 +13,6 @@ public class CreateOrderCommand {
     private String orderCheckingId;
     private PaymentMethod paymentMethod;
 
+    private String cartId;
+
 }

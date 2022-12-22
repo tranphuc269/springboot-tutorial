@@ -14,9 +14,12 @@ public class CreateOrderEvent extends BaseEvent<String> {
     private PaymentMethod paymentMethod;
     private OrderStatus orderStatus;
 
-    public CreateOrderEvent(String orderCheckingId, PaymentMethod paymentMethod) {
+    private String cartId;
+
+    public CreateOrderEvent(String orderCheckingId, PaymentMethod paymentMethod, String cartId) {
         super(orderCheckingId);
         this.orderStatus = OrderStatus.CREATED;
         this.paymentMethod = paymentMethod;
+        this.cartId = cartId;
     }
 }

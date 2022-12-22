@@ -32,7 +32,7 @@ public class OrderCommandAggregate {
     public OrderCommandAggregate(CreateOrderCommand command) {
         CreateOrderEvent event = new CreateOrderEvent(
                 command.getOrderCheckingId(),
-                command.getPaymentMethod());
+                command.getPaymentMethod(), command.getCartId());
         AggregateLifecycle.apply(event);
     }
 

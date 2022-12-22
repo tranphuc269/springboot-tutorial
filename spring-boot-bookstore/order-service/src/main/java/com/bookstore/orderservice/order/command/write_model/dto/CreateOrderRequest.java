@@ -12,4 +12,6 @@ import lombok.*;
 @NoArgsConstructor
 public class CreateOrderRequest {
     private String paymentMethod;
+
+    private String cartId;
 }
