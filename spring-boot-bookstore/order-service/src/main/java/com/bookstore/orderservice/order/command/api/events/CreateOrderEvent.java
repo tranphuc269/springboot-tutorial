@@ -26,7 +26,8 @@ public class CreateOrderEvent extends BaseEvent<String> {
     @Override
     public String toString() {
         return "CreateOrderEvent{" +
-                "paymentMethod=" + paymentMethod +
+                "id=" + super.id +
+                ", paymentMethod=" + paymentMethod +
                 ", orderStatus=" + orderStatus +
                 ", cartId='" + cartId + '\'' +
                 '}';

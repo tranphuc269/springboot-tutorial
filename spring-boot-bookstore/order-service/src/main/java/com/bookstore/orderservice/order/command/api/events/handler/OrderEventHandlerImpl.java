@@ -13,6 +13,7 @@ import com.bookstore.orderservice.utils.OrderStatus;
 import com.bookstore.orderservice.utils.PaymentStatus;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,8 @@ public class OrderEventHandlerImpl implements IOrderEventHandler {
         entity.setCreateTime(new Date());
         entity.setUpdateTime(new Date());
         OrderCommandEntity save = repository.save(entity);
-//        createOrderItem(event.getCartId(), save.getOrderId());
-//        createShippingAddress(save.getOrderId());
+        createOrderItem(event.getCartId(), save.getOrderId());
+        createShippingAddress(save.getOrderId());
     }
 
     private void createOrderItem(String cartId, String orderId) {

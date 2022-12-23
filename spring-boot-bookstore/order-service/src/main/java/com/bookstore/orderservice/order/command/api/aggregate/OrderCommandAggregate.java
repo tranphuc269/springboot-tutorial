@@ -11,9 +11,12 @@ import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
-@Aggregate
-public class OrderCommandAggregate {
+import java.io.Serializable;
 
+@Aggregate
+public class OrderCommandAggregate implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @AggregateIdentifier
     private String orderCheckingId;
 
