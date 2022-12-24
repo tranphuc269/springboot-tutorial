@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RequestMapping
 public class HelloController {
-    @GetMapping("/messages/{id}")
-    public BaseResponse<HelloDto> sayHelloWorld(@PathVariable String id) {
-        var res = HelloDto.builder()
-                .id(id)
-                .message("Hello, it works!")
-                .build();
-        return BaseResponse.ofSucceeded(res);
-    }
+//    @GetMapping("/messages/{id}")
+//    public BaseResponse<HelloDto> sayHelloWorld(@PathVariable String id) {
+//        var res = HelloDto.builder()
+//                .id(id)
+//                .message("Hello, it works!")
+//                .build();
+//        return BaseResponse.ofSucceeded(res);
+//    }
 }

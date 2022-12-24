@@ -31,8 +31,6 @@
                 <spring.profiles.active>dev</spring.profiles.active>
                 <activatedProperties>dev</activatedProperties>
             </properties>
-
-
         </profile>
         <profile>
             <id>prod</id>
