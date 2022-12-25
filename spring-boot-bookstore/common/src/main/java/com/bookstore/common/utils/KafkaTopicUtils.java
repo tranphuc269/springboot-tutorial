@@ -5,4 +5,7 @@ public class KafkaTopicUtils {
     }
 
     static final public String TOPIC_ADD_TO_CART = "topic-add-to-cart";
+
+    static final public String TOPIC_SEND_NOTIFICATION_FROM_ORDER = "topic-send-notification-from-order";
+
 }

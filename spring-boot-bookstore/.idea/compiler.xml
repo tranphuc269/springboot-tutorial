@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="auth-service" />
+        <module name="payment-service" />
         <module name="common" />
         <module name="search-service" />
         <module name="catalog-service" />
@@ -22,6 +23,7 @@
       <module name="discovery-service" target="11" />
       <module name="notification-service" target="11" />
       <module name="order-service" target="11" />
+      <module name="payment-service" target="11" />
       <module name="search-service" target="1.6" />
       <module name="spring-boot-bookstore" target="1.8" />
     </bytecodeTargetLevel>
@@ -34,6 +36,7 @@
       <module name="discovery-service" options="-parameters" />
       <module name="notification-service" options="-parameters" />
       <module name="order-service" options="-parameters" />
+      <module name="payment-service" options="-parameters" />
       <module name="search-service" options="-parameters" />
     </option>
   </component>

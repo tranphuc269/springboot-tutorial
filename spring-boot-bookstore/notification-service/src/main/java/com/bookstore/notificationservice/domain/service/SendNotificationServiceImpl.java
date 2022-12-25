@@ -1,14 +1,11 @@
 package com.bookstore.notificationservice.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
-import java.util.Properties;
 
 
 @Service
@@ -19,7 +16,7 @@ public class SendNotificationServiceImpl implements ISendNotificationService {
 
     @Override
     public void sendGmail() {
-        String subject = "Test mail from Project Management System";
+        String subject = "Thư xác nhận đơn hàng của hệ thống";
         String content = "<tbody><tr>\n" +
                 "      <td valign=\"top\" style=\"padding:0;Margin:0\">\n" +
                 "       <table cellpadding=\"0\" cellspacing=\"0\" class=\"es-header\" align=\"center\" style=\"mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top\">\n" +
@@ -571,13 +568,15 @@ public class SendNotificationServiceImpl implements ISendNotificationService {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         try {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, isMultipart, "UTF-8");
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage,
+                    isMultipart,
+                    "UTF-8");
             messageHelper.setFrom("phuc260900@gmail.com");
             messageHelper.setTo(to);
             messageHelper.setSubject(subject);
             messageHelper.setText(content, isHtml);
             mailSender.send(mimeMessage);
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
     }
     @Override
