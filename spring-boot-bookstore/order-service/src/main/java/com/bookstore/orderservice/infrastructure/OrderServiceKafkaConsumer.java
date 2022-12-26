@@ -2,7 +2,7 @@ package com.bookstore.orderservice.infrastructure;
 
 import com.bookstore.common.infrastructure.kafka.product_order.KafkaSendProductCreateCartItem;
 import com.bookstore.common.utils.KafkaTopicUtils;
-import com.bookstore.orderservice.cart_item.command.api.commands.AddCartItemCommand;
+import com.bookstore.orderservice.application.es.cart_item.command.api.commands.AddCartItemCommand;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
