@@ -4,6 +4,8 @@ import com.bookstore.common.infrastructure.repo.model.BaseModel;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.*;
@@ -61,7 +63,8 @@ public class ProductCommandEntity extends BaseModel {
     }
 
     public List<String> getListImages() {
-        List<String> imgs = new ArrayList<>(List.of(this.getImages().replace(']', ' ').replace('[', ' ').trim().split(",")));
+        List<String> imgs = new ArrayList<>();
+        Collections.addAll(imgs, this.getImages().replace(']', ' ').replace('[', ' ').trim().split(","));
         imgs.replaceAll(String::trim);
         return imgs;
     }

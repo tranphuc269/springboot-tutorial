@@ -44,10 +44,10 @@ public class ReviewEventHandler implements IReviewEventHandler{
         Optional<ReviewCommandEntity>
                 reviewCommand = repository
                 .findById(event.getReviewId());
-        if(reviewCommand.isEmpty()){
-            throw new ExceptionCommon(new BusinessError(404,
-                    "Not found review", HttpStatus.NOT_FOUND));
-        }
+//        if(reviewCommand.isEmpty()){
+//            throw new ExceptionCommon(new BusinessError(404,
+//                    "Not found review", HttpStatus.NOT_FOUND));
+//        }
         reviewCommand.get().setReviewContent(event.getReviewContent());
         reviewCommand.get().setUpdateTime(new Date());
         reviewCommand.get().setStatus(1);
@@ -62,10 +62,10 @@ public class ReviewEventHandler implements IReviewEventHandler{
         Optional<ReviewCommandEntity>
                 reviewCommand = repository
                 .findById(event.getReviewId());
-        if(reviewCommand.isEmpty()){
-            throw new ExceptionCommon(new BusinessError(404,
-                    "Not found review", HttpStatus.NOT_FOUND));
-        }
+//        if(reviewCommand.isEmpty()){
+//            throw new ExceptionCommon(new BusinessError(404,
+//                    "Not found review", HttpStatus.NOT_FOUND));
+//        }
         reviewCommand.get().setStatus(0);
         repository.save(reviewCommand.get());
     }

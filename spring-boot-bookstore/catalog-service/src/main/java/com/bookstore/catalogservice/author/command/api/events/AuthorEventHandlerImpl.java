@@ -34,9 +34,9 @@ public class AuthorEventHandlerImpl implements IAuthorEvent {
     @EventHandler
     public void on(UpdateAuthorEvent event) {
         Optional<AuthorModel> author = repository.findById(event.getAuthorId());
-        if(author.isEmpty()){
-            throw new RuntimeException("Not found by author id");
-        }
+//        if(author.isEmpty()){
+//            throw new RuntimeException("Not found by author id");
+//        }
         author.get().setName(event.getAuthorName());
         author.get().setImages(event.getImages());
         author.get().setDescription(event.getDescription());
@@ -50,9 +50,9 @@ public class AuthorEventHandlerImpl implements IAuthorEvent {
     @EventHandler
     public void on(DeleteAuthorEvent event) {
         Optional<AuthorModel> author = repository.findById(event.getAuthorId());
-        if(author.isEmpty()){
-            throw new RuntimeException("Not found by author id");
-        }
+//        if(author.isEmpty()){
+//            throw new RuntimeException("Not found by author id");
+//        }
         author.get().setStatus(0);
         repository.save(author.get());
     }
@@ -60,9 +60,9 @@ public class AuthorEventHandlerImpl implements IAuthorEvent {
     @Override
     public void on(EnableAuthorEvent event) {
         Optional<AuthorModel> author = repository.findById(event.getAuthorId());
-        if(author.isEmpty()){
-            throw new RuntimeException("Not found by author id");
-        }
+//        if(author.isEmpty()){
+//            throw new RuntimeException("Not found by author id");
+//        }
         author.get().setStatus(1);
         repository.save(author.get());
     }

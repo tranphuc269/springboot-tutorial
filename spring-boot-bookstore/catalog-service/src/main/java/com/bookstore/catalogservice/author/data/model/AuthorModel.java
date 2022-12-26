@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -34,13 +35,12 @@ public class AuthorModel extends BaseModel {
     private String description;
 
     public List<String> getListImages() {
-        List<String> imgs = new ArrayList<>
-                (List
-                        .of(this.getImages()
-                        .replace(']', ' ')
-                                .replace('[', ' ')
-                                .trim()
-                                .split(",")));
+        List<String> imgs = new ArrayList<>();
+        Collections.addAll(imgs, this.getImages()
+                .replace(']', ' ')
+                .replace('[', ' ')
+                .trim()
+                .split(","));
         imgs.replaceAll(String::trim);
         return imgs;
     }

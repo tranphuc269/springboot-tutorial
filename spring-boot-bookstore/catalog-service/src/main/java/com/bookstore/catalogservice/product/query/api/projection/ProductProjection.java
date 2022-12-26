@@ -68,10 +68,10 @@ public class ProductProjection {
     public ProductDetailResponse handle(GetDetailProductQuery query) {
 
         Optional<ProductQueryEntity> productQuery = productRepository.findById(query.getProductId());
-        if (productQuery.isEmpty()) {
-            throw new ExceptionCommon(new BusinessError(404,
-                    "Not found product", HttpStatus.NOT_FOUND));
-        }
+//        if (productQuery.isEmpty()) {
+//            throw new ExceptionCommon(new BusinessError(404,
+//                    "Not found product", HttpStatus.NOT_FOUND));
+//        }
         // get author
         AuthorModel authorModel = authorRepository
                 .findById(productQuery.get().getAuthorId()).get();
@@ -161,9 +161,9 @@ public class ProductProjection {
     public String handle(AddProductToCartQuery query){
         Optional<ProductQueryEntity> entityOptional =
                 productRepository.findById(query.getProductId());
-        if(entityOptional.isEmpty()){
-            throw new RuntimeException("Not found product");
-        }
+//        if(entityOptional.isEmpty()){
+//            throw new RuntimeException("Not found product");
+//        }
         kafkaProducer.send(KafkaTopicUtils.TOPIC_ADD_TO_CART,
                 KafkaSendProductCreateCartItem
                         .builder()

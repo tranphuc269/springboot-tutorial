@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,7 +51,6 @@ public class ProductQueryEntity extends BaseModel {
     private String authorId;
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,7 +65,12 @@ public class ProductQueryEntity extends BaseModel {
     }
 
     public List<String> getListImages() {
-        List<String> imgs = new ArrayList<>(List.of(this.getImages().replace(']', ' ').replace('[', ' ').trim().split(",")));
+        List<String> imgs = new ArrayList<>();
+        Collections.addAll(imgs,
+                this.getImages()
+                        .replace(']',
+                                ' ')
+                        .replace('[', ' ').trim().split(","));
         imgs.replaceAll(String::trim);
         return imgs;
     }

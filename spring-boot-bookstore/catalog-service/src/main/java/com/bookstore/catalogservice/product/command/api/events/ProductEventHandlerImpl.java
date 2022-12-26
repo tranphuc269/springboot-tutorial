@@ -44,10 +44,10 @@ public class ProductEventHandlerImpl implements IProductEventHandler {
     public void on(UpdateProductEvent event) {
         Optional<ProductCommandEntity> productCommand =
                 repository.findById(event.getProductId());
-        if(productCommand.isEmpty()){
-            throw new ExceptionCommon(new BusinessError(404,
-                    "Not found product", HttpStatus.NOT_FOUND));
-        }
+//        if(productCommand.isEmpty()){
+//            throw new ExceptionCommon(new BusinessError(404,
+//                    "Not found product", HttpStatus.NOT_FOUND));
+//        }
         productCommand.get().setPrice(event.getPrice());
         productCommand.get().setStatus(1);
         productCommand.get().setName(event.getName());
@@ -66,10 +66,10 @@ public class ProductEventHandlerImpl implements IProductEventHandler {
     public void on(DeleteProductEvent event) {
         Optional<ProductCommandEntity> productCommand =
                 repository.findById(event.getProductId());
-        if(productCommand.isEmpty()){
-            throw new ExceptionCommon(new BusinessError(404,
-                    "Not found product", HttpStatus.NOT_FOUND));
-        }
+//        if(productCommand.isEmpty()){
+//            throw new ExceptionCommon(new BusinessError(404,
+//                    "Not found product", HttpStatus.NOT_FOUND));
+//        }
         productCommand.get().setUpdateTime(new Date());
         productCommand.get().setStatus(0);
         repository.save(productCommand.get());
@@ -79,10 +79,10 @@ public class ProductEventHandlerImpl implements IProductEventHandler {
     public void on(EnableProductEvent event) {
         Optional<ProductCommandEntity> productCommand =
                 repository.findById(event.getProductId());
-        if(productCommand.isEmpty()){
-            throw new ExceptionCommon(new BusinessError(404,
-                    "Not found product", HttpStatus.NOT_FOUND));
-        }
+//        if(productCommand.isEmpty()){
+//            throw new ExceptionCommon(new BusinessError(404,
+//                    "Not found product", HttpStatus.NOT_FOUND));
+//        }
         productCommand.get().setUpdateTime(new Date());
         productCommand.get().setStatus(1);
         repository.save(productCommand.get());
@@ -92,10 +92,10 @@ public class ProductEventHandlerImpl implements IProductEventHandler {
     public void on(SellProductEvent event) {
         Optional<ProductCommandEntity> productCommand =
                 repository.findById(event.getProductId());
-        if(productCommand.isEmpty()){
-            throw new ExceptionCommon(new BusinessError(404,
-                    "Not found product", HttpStatus.NOT_FOUND));
-        }
+//        if(productCommand.isEmpty()){
+//            throw new ExceptionCommon(new BusinessError(404,
+//                    "Not found product", HttpStatus.NOT_FOUND));
+//        }
         productCommand.get()
                 .setQuantitySold(productCommand.get().getQuantitySold()
                         + event.getQuantity());
