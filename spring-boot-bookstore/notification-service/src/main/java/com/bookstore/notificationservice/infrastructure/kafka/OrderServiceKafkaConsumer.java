@@ -2,6 +2,8 @@ package com.bookstore.notificationservice.infrastructure.kafka;
 
 import com.bookstore.common.infrastructure.kafka.product_order.KafkaSendProductCreateCartItem;
 import com.bookstore.common.utils.KafkaTopicUtils;
+import com.bookstore.common.utils.notification.NotificationDestination;
+import com.bookstore.notificationservice.domain.service.ISendNotificationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -21,6 +24,9 @@ public class OrderServiceKafkaConsumer {
 
     @Autowired
     private CommandGateway commandGateway;
+
+    @Autowired
+    private ISendNotificationService service;
 
     @KafkaListener(topics = KafkaTopicUtils.TOPIC_SEND_NOTIFICATION_FROM_ORDER)
     public void addProductToCart(String kafkaMessage) {
@@ -35,17 +41,10 @@ public class OrderServiceKafkaConsumer {
         } catch (JsonProcessingException ex) {
             ex.printStackTrace();
         }
-        KafkaSendProductCreateCartItem request = KafkaSendProductCreateCartItem.builder()
-                .cartId((String) map.get("cartId"))
-                .quantity(Integer.parseInt(map.get("quantity").toString()))
-                .productId((String) map.get("productId"))
-                .productName((String) map.get("productName"))
-                .images((String) map.get("images"))
-                .productShortDescription(map.get("productShortDescription").toString())
-                .productPrice(Double.parseDouble(map.get("productPrice").toString()))
-                .build();
+
+        if(Objects.equals(map.get("destination").toString(), NotificationDestination.EMAIL.name())){
+            service.sendGmail();
+        }
 
     }
-
-
 }

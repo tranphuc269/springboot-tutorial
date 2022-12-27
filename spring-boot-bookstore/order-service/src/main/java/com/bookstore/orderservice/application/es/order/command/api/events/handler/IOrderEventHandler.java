@@ -1,7 +1,6 @@
 package com.bookstore.orderservice.application.es.order.command.api.events.handler;
 
 import com.bookstore.orderservice.application.es.order.command.api.events.*;
-import com.bookstore.orderservice.order.command.api.events.*;
 
 public interface IOrderEventHandler {
 

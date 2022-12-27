@@ -4,8 +4,6 @@ package com.bookstore.orderservice.application.es.order.command.api.controller;
 import com.bookstore.common.application.response.dto.BaseResponse;
 import com.bookstore.orderservice.application.es.order.command.api.commands.*;
 import com.bookstore.orderservice.application.es.order.command.write_model.dto.*;
-import com.bookstore.orderservice.order.command.api.commands.*;
-import com.bookstore.orderservice.order.command.write_model.dto.*;
 import com.bookstore.orderservice.utils.PaymentMethod;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;

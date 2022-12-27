@@ -3,8 +3,6 @@ package com.bookstore.orderservice.application.es.order.command.api.aggregate;
 
 import com.bookstore.orderservice.application.es.order.command.api.commands.*;
 import com.bookstore.orderservice.application.es.order.command.api.events.*;
-import com.bookstore.orderservice.order.command.api.commands.*;
-import com.bookstore.orderservice.order.command.api.events.*;
 import com.bookstore.orderservice.utils.OrderStatus;
 import com.bookstore.orderservice.utils.PaymentMethod;
 import org.axonframework.commandhandling.CommandHandler;

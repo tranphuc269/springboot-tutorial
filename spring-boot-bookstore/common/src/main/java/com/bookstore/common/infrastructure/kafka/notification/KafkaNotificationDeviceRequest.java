@@ -10,10 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class KafkaNotificationDeviceRequest extends KafkaNotificationRequest {
-    @Override
-    public NotificationDestination getDestination() {
-        return NotificationDestination.DEVICE;
-    }
+    private NotificationDestination destination;
 
     private String title;
     private String userId;

@@ -2,6 +2,7 @@ package com.bookstore.orderservice.application.es.order.command.api.events.handl
 
 import com.bookstore.common.infrastructure.kafka.notification.KafkaNotificationDeviceRequest;
 import com.bookstore.common.infrastructure.kafka.notification.KafkaNotificationEmailRequest;
+import com.bookstore.common.utils.notification.NotificationDestination;
 import com.bookstore.common.utils.notification.NotificationSourceType;
 import com.bookstore.orderservice.application.es.order.command.api.events.*;
 import com.bookstore.orderservice.application.es.order.command.write_model.OrderCommandRepository;
@@ -65,12 +66,14 @@ public class OrderEventHandlerImpl implements IOrderEventHandler {
                 .builder()
                 .title("Bạn đã đặt thành công đơn hàng : " + save.getOrderId())
                 .userId(save.getUserId())
+                .destination(NotificationDestination.EMAIL)
                 .build());
         notificationService.send(KafkaNotificationDeviceRequest
                 .builder()
                 .title("Bạn đã đặt thành công đơn hàng : " + save.getOrderId())
                 .userId(save.getUserId())
                 .sourceId(save.getOrderId())
+                .destination(NotificationDestination.DEVICE)
                 .sourceType(NotificationSourceType.ORDER)
                 .build());
 
@@ -170,6 +173,7 @@ public class OrderEventHandlerImpl implements IOrderEventHandler {
                 .builder()
                 .title("Đơn hàng của bạn đã được giao cho bên vận chuyển, mã đơn hàng : " + entityOptional.get().getOrderId())
                 .userId(entityOptional.get().getUserId())
+                .destination(NotificationDestination.EMAIL)
                 .sourceId(entityOptional.get().getOrderId()).sourceType(NotificationSourceType.ORDER)
                 .build());
     }
@@ -189,6 +193,7 @@ public class OrderEventHandlerImpl implements IOrderEventHandler {
                 .builder()
                 .title("Đơn hàng của bạn đã được hoàn lại, mã đơn hàng : " + entityOptional.get().getOrderId())
                 .userId(entityOptional.get().getUserId())
+                .destination(NotificationDestination.EMAIL)
                 .sourceId(entityOptional.get().getOrderId()).sourceType(NotificationSourceType.ORDER)
                 .build());
     }
@@ -208,6 +213,7 @@ public class OrderEventHandlerImpl implements IOrderEventHandler {
                 .builder()
                 .title("Đơn hàng của bạn đã được giao hoàn tất, mã đơn hàng : " + entityOptional.get().getOrderId())
                 .userId(entityOptional.get().getUserId())
+                .destination(NotificationDestination.EMAIL)
                 .sourceId(entityOptional.get().getOrderId()).sourceType(NotificationSourceType.ORDER)
                 .build());
     }

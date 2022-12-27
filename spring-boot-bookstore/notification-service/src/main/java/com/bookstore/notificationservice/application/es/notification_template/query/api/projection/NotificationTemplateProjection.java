@@ -20,7 +20,6 @@ public class NotificationTemplateProjection {
     @QueryHandler
     public List<NotificationTemplateResponse> findAllTemplate(GetAllTemplateQuery query){
         List<NotificationTemplateQueryEntity> entities = repository.findAll();
-        System.out.println("entities : " + entities.size());
         return entities
                 .stream()
                 .map(entity ->

@@ -3,9 +3,11 @@ package com.bookstore.notificationservice.application.es.notification.command.ap
 import com.bookstore.notificationservice.domain.service.ISendNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/api/notification")
+@RequestMapping("/api/notification")
+@RestController
 public class NotificationController {
 
     @Autowired
