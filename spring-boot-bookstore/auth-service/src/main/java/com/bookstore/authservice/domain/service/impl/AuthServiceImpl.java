@@ -146,7 +146,7 @@ public class AuthServiceImpl implements AuthService {
                         .builder()
                         .userId(savedUser.getUserId())
                         .email(savedUser.getEmail())
-                        .userName(savedUser.getUserName())
+                        .userName(savedUser.getFirstName() + " " + savedUser.getLastName())
                         .firebaseToken("None")
                         .build());
         return CreateUserResponse.builder()
@@ -167,7 +167,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         Optional<UserEntity> userEntity = userRepository.findByUserNameOrEmail(signInRequest.getUsernameOrEmail(), signInRequest.getUsernameOrEmail());
-        if (userEntity.isEmpty()) {
+        if (!userEntity.isPresent()) {
             throw new RuntimeException("Account have been delete");
         }
         JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
