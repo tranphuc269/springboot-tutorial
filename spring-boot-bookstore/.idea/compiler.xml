@@ -19,9 +19,9 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-gateway-service" target="11" />
-      <module name="auth-service" target="1.8" />
-      <module name="catalog-service" target="1.8" />
-      <module name="common" target="1.8" />
+      <module name="auth-service" target="11" />
+      <module name="catalog-service" target="11" />
+      <module name="common" target="11" />
       <module name="discovery-service" target="11" />
       <module name="notification-service" target="11" />
       <module name="order-service" target="11" />

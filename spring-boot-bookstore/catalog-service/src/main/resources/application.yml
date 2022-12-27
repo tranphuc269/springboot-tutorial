@@ -1,5 +1,8 @@
 server:
   port: ${port:9001}
+security:
+  jwt:
+    public-key: classpath:jwt-signing-public-key.txt
 
 spring:
   application:
@@ -55,6 +58,14 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh, prometheus
+
+  security:
+    enabled: false
 
 axon:
   axonserver:

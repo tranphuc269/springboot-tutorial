@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class KafkaSendProductCreateCartItem {
-    private String cartId;
+    private String userId;
     private int quantity;
     private String productId;
     private String productName;

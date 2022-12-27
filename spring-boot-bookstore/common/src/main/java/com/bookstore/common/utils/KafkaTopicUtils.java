@@ -11,4 +11,6 @@ public class KafkaTopicUtils {
 
     static final public String TOPIC_UPDATE_NOTIFICATION_INFO_FROM_USER = "user-notification";
 
+    static final public String TOPIC_CREATE_CART_FROM_USER = "create-cart-from-user";
+
 }

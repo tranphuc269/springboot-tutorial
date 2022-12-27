@@ -25,8 +25,9 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Abst
     public GatewayFilter apply(NameConfig config) {
         return ((exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
+            System.out.println("request.getHeaders() : " + request.getHeaders().toString());
 
-            if(!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)
+            if (!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)
             ) {
                 return onError(
                         exchange,
@@ -40,7 +41,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Abst
                     .get(0);
             String jwt = authorizationHeader.replace("Bearer", "");
 
-            if(!isJwtValid(jwt)) {
+            if (!isJwtValid(jwt)) {
                 return onError(
                         exchange,
                         "JWT token is not valid",
@@ -62,11 +63,11 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Abst
                     .parseClaimsJws(jwt)
                     .getBody()
                     .getSubject();
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             _valid = false;
         }
 
-        if(subject == null || subject.isEmpty()) {
+        if (subject == null || subject.isEmpty()) {
             _valid = false;
         }
 

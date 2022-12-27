@@ -149,6 +149,9 @@ public class AuthServiceImpl implements AuthService {
                         .userName(savedUser.getFirstName() + " " + savedUser.getLastName())
                         .firebaseToken("None")
                         .build());
+        // send to order-service to create cart
+        kafkaProducer.send(KafkaTopicUtils.TOPIC_CREATE_CART_FROM_USER,
+                savedUser.getUserId());
         return CreateUserResponse.builder()
                 .userId(savedUser.getUserId())
                 .userName(savedUser.getUserName())
@@ -159,16 +162,13 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public JwtAuthenticationResponse loginUser(SignInRequest signInRequest) {
         if (userRepository.existsByUserName(signInRequest.getUsernameOrEmail())) {
-            throw new RuntimeException("Username is already taken!!");
         }
 
         if (userRepository.existsByEmail(signInRequest.getUsernameOrEmail())) {
-            throw new RuntimeException("Email address already in use!!");
         }
 
-        Optional<UserEntity> userEntity = userRepository.findByUserNameOrEmail(signInRequest.getUsernameOrEmail(), signInRequest.getUsernameOrEmail());
-        if (!userEntity.isPresent()) {
-            throw new RuntimeException("Account have been delete");
+        Optional<UserEntity> userDAO = userRepository.findByUserNameOrEmail(signInRequest.getUsernameOrEmail(), signInRequest.getUsernameOrEmail());
+        if(userDAO.isEmpty()){
         }
         JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
         return JwtAuthenticationResponse
@@ -181,12 +181,12 @@ public class AuthServiceImpl implements AuthService {
 
                     @Override
                     public String getPassword() {
-                        return userEntity.get().getPassword();
+                        return userDAO.get().getPassword();
                     }
 
                     @Override
                     public String getUsername() {
-                        return userEntity.get().getUserName();
+                        return userDAO.get().getUserName();
                     }
 
                     @Override
