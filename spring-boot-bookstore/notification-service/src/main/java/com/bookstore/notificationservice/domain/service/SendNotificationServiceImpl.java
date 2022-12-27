@@ -580,7 +580,7 @@ public class SendNotificationServiceImpl implements ISendNotificationService {
         }
     }
     @Override
-    public void sendNotificationToApp() {
+    public void sendNotificationToDevice() {
 
     }
 }

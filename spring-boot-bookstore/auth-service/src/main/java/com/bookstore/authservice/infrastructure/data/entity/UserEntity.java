@@ -1,4 +1,4 @@
-package com.bookstore.authservice.infrastructure.entity;
+package com.bookstore.authservice.infrastructure.data.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,8 +11,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.bookstore.authservice.application.utils.UserStatus;
-import com.bookstore.common.infrastructure.repo.model.BaseModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

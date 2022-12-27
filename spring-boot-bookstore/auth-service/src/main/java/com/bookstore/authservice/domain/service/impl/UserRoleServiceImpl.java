@@ -1,17 +1,15 @@
 package com.bookstore.authservice.domain.service.impl;
 
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 import com.bookstore.authservice.application.dto.request.MapRoleToUsersRequest;
 import com.bookstore.authservice.application.dto.request.MapUserToRolesRequest;
 import com.bookstore.authservice.domain.service.UserRoleService;
-import com.bookstore.authservice.infrastructure.entity.RoleEntity;
-import com.bookstore.authservice.infrastructure.entity.UserEntity;
-import com.bookstore.authservice.infrastructure.repository.RoleRepository;
-import com.bookstore.authservice.infrastructure.repository.UserRepository;
+import com.bookstore.authservice.infrastructure.data.entity.RoleEntity;
+import com.bookstore.authservice.infrastructure.data.entity.UserEntity;
+import com.bookstore.authservice.infrastructure.data.repository.RoleRepository;
+import com.bookstore.authservice.infrastructure.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

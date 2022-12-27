@@ -1,6 +1,6 @@
-package com.bookstore.authservice.infrastructure.repository;
+package com.bookstore.authservice.infrastructure.data.repository;
 
-import com.bookstore.authservice.infrastructure.entity.RoleEntity;
+import com.bookstore.authservice.infrastructure.data.entity.RoleEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

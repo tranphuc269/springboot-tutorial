@@ -1,4 +1,4 @@
-package com.bookstore.authservice.infrastructure.entity;
+package com.bookstore.authservice.infrastructure.data.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

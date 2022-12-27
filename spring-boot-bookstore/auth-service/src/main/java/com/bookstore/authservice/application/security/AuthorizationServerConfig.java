@@ -1,8 +1,8 @@
 package com.bookstore.authservice.application.security;
 
 import com.bookstore.authservice.domain.service.AppUserDetailsService;
-import com.bookstore.authservice.infrastructure.entity.UserEntity;
-import com.bookstore.authservice.infrastructure.repository.UserRepository;
+import com.bookstore.authservice.infrastructure.data.entity.UserEntity;
+import com.bookstore.authservice.infrastructure.data.repository.UserRepository;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +22,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;

@@ -11,7 +11,6 @@ import lombok.Setter;
 @Setter
 public class KafkaNotificationDeviceRequest extends KafkaNotificationRequest {
     private NotificationDestination destination;
-
     private String title;
     private String userId;
     private String sourceId; // if order -> orderId

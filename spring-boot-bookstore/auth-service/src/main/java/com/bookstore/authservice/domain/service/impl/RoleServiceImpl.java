@@ -2,8 +2,8 @@ package com.bookstore.authservice.domain.service.impl;
 
 import com.bookstore.authservice.application.dto.request.CreateRoleRequest;
 import com.bookstore.authservice.domain.service.RoleService;
-import com.bookstore.authservice.infrastructure.entity.RoleEntity;
-import com.bookstore.authservice.infrastructure.repository.RoleRepository;
+import com.bookstore.authservice.infrastructure.data.entity.RoleEntity;
+import com.bookstore.authservice.infrastructure.data.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -2,14 +2,12 @@ package com.bookstore.authservice.domain.service.impl;
 
 import com.bookstore.authservice.application.dto.request.*;
 import com.bookstore.authservice.application.dto.response.*;
-import com.bookstore.authservice.application.utils.UserStatus;
 import com.bookstore.authservice.domain.service.UserRoleService;
 import com.bookstore.authservice.domain.service.UserService;
-import com.bookstore.authservice.infrastructure.entity.RoleEntity;
-import com.bookstore.authservice.infrastructure.entity.UserEntity;
-import com.bookstore.authservice.infrastructure.repository.RoleRepository;
-import com.bookstore.authservice.infrastructure.repository.UserRepository;
-import com.nimbusds.oauth2.sdk.ErrorResponse;
+import com.bookstore.authservice.infrastructure.data.entity.RoleEntity;
+import com.bookstore.authservice.infrastructure.data.entity.UserEntity;
+import com.bookstore.authservice.infrastructure.data.repository.RoleRepository;
+import com.bookstore.authservice.infrastructure.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

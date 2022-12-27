@@ -1,7 +1,6 @@
-package com.bookstore.authservice.infrastructure.entity;
+package com.bookstore.authservice.infrastructure.data.entity;
 
 
-import com.bookstore.common.infrastructure.repo.model.BaseModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;

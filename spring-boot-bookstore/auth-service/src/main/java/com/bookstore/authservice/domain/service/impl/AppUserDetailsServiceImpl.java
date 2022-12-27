@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.bookstore.authservice.domain.service.AppUserDetailsService;
-import com.bookstore.authservice.infrastructure.entity.UserEntity;
-import com.bookstore.authservice.infrastructure.repository.UserRepository;
+import com.bookstore.authservice.infrastructure.data.entity.UserEntity;
+import com.bookstore.authservice.infrastructure.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

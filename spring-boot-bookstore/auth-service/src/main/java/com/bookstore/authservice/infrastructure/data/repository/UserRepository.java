@@ -1,6 +1,6 @@
-package com.bookstore.authservice.infrastructure.repository;
+package com.bookstore.authservice.infrastructure.data.repository;
 
-import com.bookstore.authservice.infrastructure.entity.UserEntity;
+import com.bookstore.authservice.infrastructure.data.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

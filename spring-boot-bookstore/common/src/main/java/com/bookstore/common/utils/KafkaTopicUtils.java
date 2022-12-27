@@ -8,4 +8,7 @@ public class KafkaTopicUtils {
 
     static final public String TOPIC_SEND_NOTIFICATION_FROM_ORDER = "topic-send-notification-from-order";
 
+
+    static final public String TOPIC_UPDATE_NOTIFICATION_INFO_FROM_USER = "user-notification";
+
 }

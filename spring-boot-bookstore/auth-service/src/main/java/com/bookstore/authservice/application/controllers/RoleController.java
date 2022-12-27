@@ -6,7 +6,7 @@ import javax.validation.Valid;
 
 import com.bookstore.authservice.application.dto.request.CreateRoleRequest;
 import com.bookstore.authservice.domain.service.RoleService;
-import com.bookstore.authservice.infrastructure.entity.RoleEntity;
+import com.bookstore.authservice.infrastructure.data.entity.RoleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

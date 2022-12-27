@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class NotificationUserEntity extends BaseModel {
+public class NotificationUserCommandEntity extends BaseModel {
     @Id
     @GeneratedValue(generator = "notification-users-uuid")
     @GenericGenerator(name = "notification-users-uuid", strategy = "uuid")

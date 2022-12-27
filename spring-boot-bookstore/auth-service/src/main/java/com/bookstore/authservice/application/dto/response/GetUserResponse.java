@@ -2,7 +2,7 @@ package com.bookstore.authservice.application.dto.response;
 
 import java.util.Set;
 
-import com.bookstore.authservice.infrastructure.entity.RoleEntity;
+import com.bookstore.authservice.infrastructure.data.entity.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

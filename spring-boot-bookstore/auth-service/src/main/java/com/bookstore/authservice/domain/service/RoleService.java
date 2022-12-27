@@ -1,7 +1,7 @@
 package com.bookstore.authservice.domain.service;
 
 import com.bookstore.authservice.application.dto.request.CreateRoleRequest;
-import com.bookstore.authservice.infrastructure.entity.RoleEntity;
+import com.bookstore.authservice.infrastructure.data.entity.RoleEntity;
 
 import java.util.List;
 
