@@ -54,7 +54,7 @@ public class OrderServiceKafkaConsumer {
                 .productPrice(Double.parseDouble(map.get("productPrice").toString()))
                 .build();
         CartQueryEntity entity = queryGateway.query(
-                        GetCartByUserIdQuery.builder().build(),
+                        GetCartByUserIdQuery.builder().userId(request.getUserId()).build(),
                         ResponseTypes.instanceOf(CartQueryEntity.class))
                 .join();
         AddCartItemCommand command = new AddCartItemCommand(UUID.randomUUID().toString(),

@@ -60,6 +60,7 @@ public class CartProjection {
     public CartQueryEntity handle(GetCartByUserIdQuery query) {
         Optional<CartQueryEntity> optionalCartQuery
                 = cartRepository.findByUserId(query.getUserId());
+        System.out.println("query.getUserId() : " + query.getUserId());
         return optionalCartQuery.get();
     }
 }
