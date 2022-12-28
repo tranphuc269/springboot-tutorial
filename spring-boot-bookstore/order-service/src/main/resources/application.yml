@@ -1,6 +1,10 @@
 server:
   port: ${port:9002}
 
+security:
+  jwt:
+    public-key: classpath:jwt-signing-public-key.txt
+
 spring:
   application:
     name: order-service
